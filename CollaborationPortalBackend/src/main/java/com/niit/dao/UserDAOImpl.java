@@ -27,12 +27,16 @@ public class UserDAOImpl implements UserDAO{
 	
 	public boolean validate(String username, String password) {
 		// TODO Auto-generated method stub
-		String hql= "from User where username=:username and password=:password";
+		System.out.println("INSIDE USER DAO IMPL VALIDATE"+username+" "+password);
+		String hql= "select username from User where username=:username and password=:password";
 		Query q=sessionFactory.openSession().createQuery(hql);
 		q.setParameter("username", username);
 		q.setParameter("password", password);
 
+	
+		@SuppressWarnings("unchecked")
 		List<User> l=q.list();
+		System.out.println("list is "+l);
 		if(l.size()>0)
 		{
 			return true;
@@ -46,6 +50,7 @@ public class UserDAOImpl implements UserDAO{
 
 	public boolean saveUser(User u) {
 		// TODO Auto-generated method stub
+		System.out.println("Entring Save User Method");
 		try{
 		Session sess=sessionFactory.openSession();
 		Transaction tx=sess.beginTransaction();
@@ -79,17 +84,14 @@ public class UserDAOImpl implements UserDAO{
 		}
 	}
 
-		public List<User> getAllUsers(String username) {
+		public List<User> getAllUsers() {
 			Session session = sessionFactory.openSession();
-			Query query=session.createQuery("from c_user");
+			Query query=session.createQuery("from User");
 			// Transaction tx = session.beginTransaction();
 			/*SQLQuery query=session.createSQLQuery("select * from l_user where username in (select username from l_user where username!=? minus(select friend_name from l_friend where username=? union select username from l_friend where friend_name=?))");*/
-			query.setString(0, username);
-			//query.setString(1, username);
-			//query.setString(2, username);
-			//query.addEntity(User.class);
+			//query.setString("username", username);
 			List<User> users=query.list();
-			System.out.println(users);
+			System.out.println("USER DETAILS"+users);
 			System.out.println("Getall users in userdao"+users);
 			// tx.commit();
 			session.close();

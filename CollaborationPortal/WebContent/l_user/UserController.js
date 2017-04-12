@@ -9,12 +9,12 @@ app.controller('UserController', ['$scope', 'UserService','$rootScope','$locatio
     		gender:'',
     		contact:'',
     		address:'',
-    		status:'',
+    		status:' ',
     		role:'',
-    		reason:'',
-    		isOnline:'',
-    		errorcode:'',
-    		errormessage:''
+    		reason:' ',
+    		isOnline:' ',
+    		errorcode:' ',
+    		errormessage:' '
     		
     
     
@@ -36,7 +36,7 @@ app.controller('UserController', ['$scope', 'UserService','$rootScope','$locatio
     	
     	UserService.authenticate(user).then(
     		function(d)	{
-    			
+    			console.log("inside authenticate")
     			self.user=d;
     			console.log("user.errorcode: " + self.user.errorcode)
     			if(self.user.errorcode=="404"){
@@ -107,13 +107,13 @@ app.controller('UserController', ['$scope', 'UserService','$rootScope','$locatio
     				$location.path("/");
     			},
     			function(errResponse){
-					console.error('Error while creating user.....');
+					console.error('Hello.....'+user);
     			}
     	);
     	
     };
     
-    self.fetchAllUsers = function() {
+   /* self.fetchAllUsers = function() {
 		console.log("fetchAllUsers...")
 		UserService.fetchAllUsers()
 				.then(
@@ -227,17 +227,17 @@ app.controller('UserController', ['$scope', 'UserService','$rootScope','$locatio
 	    		email_id:'',
 	    		contact:'',
 	    		address:'',
-	    		status:'',
+	    		status:' ',
 	    		gender:'',
 	    		role:'',
-	    		reason:'',
-	    		isOnline:'',
-	    		errorcode:'',
-	    		errormessage:''
+	    		reason:' ',
+	    		isOnline:' ',
+	    		errorcode:' ',
+	    		errormessage:' '
 		};
 		$scope.myForm.$setPristine(); // reset Form
 	};
     
-    
+    */
     
 }]);

@@ -5,7 +5,7 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
-@Entity(name="c_user")
+@Entity
 @Component
 public class User extends Error{
 
@@ -90,6 +90,13 @@ public class User extends Error{
 	public void setIsOnline(char isOnline) {
 		this.isOnline = isOnline;
 	}
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", name=" + name + ", email_id=" + email_id + ", gender=" + gender
+				+ ", password=" + password + ", contact=" + contact + ", address=" + address + ", status=" + status
+				+ ", role=" + role + ", reason=" + reason + ", isOnline=" + isOnline + "]";
+	}
+	
 	
 	
 }

@@ -30,7 +30,7 @@ controller : 'UserController'
 })
 
 .when('/register',{
-templateUrl : 'l_user/register.html',
+templateUrl : 'l_user/registration.html',
 controller : 'UserController'
 })
 

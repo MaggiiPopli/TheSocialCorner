@@ -28,20 +28,21 @@ app.factory('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
     	},
  
  createUser:function(user){
+	 console.log(BASE_URL)
 	 console.log('createUser Method in UserService')
-	 return $http.post(BASE_URL+'/register/',user)
+	 return $http.post('http://localhost:8080/CollaborationPortalBackend/register/',user)
 	 .then(
 			 function(response){
 				 return response.data;
 			 },
 			 function(errResponse){
-				 console.error('Error while creating the User');
+				 console.error('Error while creating the User'+user);
 				 return $q.reject(errResponse);
 				 
 			 });
-	 },
+	 }
 	 
-	 fetchAllUsers: function() {
+	/* fetchAllUsers: function() {
      	console.log("calling fetchAllUsers ")
              return $http.get(BASE_URL+'/users')
                      .then(
@@ -136,7 +137,7 @@ app.factory('UserService', ['$http', '$q','$rootScope', function($http, $q,$root
                 
              }
      );
- }
+ }*/
  
  
  }}]);

@@ -57,15 +57,32 @@
       </li>
       <li><a style="color:white" href="#">CHAT</a></li>
     </ul>
+    
+    <div ng-show="!loggedIn">
     <ul class="nav navbar-nav navbar-right">
     
- 
+ 	
    	<li><a style="color:white" href="#login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       <li><a style="color:white" href="#register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
       
     
       
     </ul>
+    </div>
+    <div ng-show="loggedIn">
+    <ul class="nav navbar-nav navbar-right">
+    
+    <li class="dropdown" style="text-align: right;"><a class="dropdown-toggle" data-toggle="dropdown" > Welcome: {{currentUser.username}}<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							<li><a href="#/myprofile" ng-click="ctrl.myProfile()" >My Profile</a></li>
+							<li ><a href="#/logout" ng-click="ctrl.logout()" style="text-align: right;">Logout</a></li>
+							</ul>
+							</li>
+    
+    
+    </ul>
+    </div>
+    
     </div>
 </nav>
 </body>

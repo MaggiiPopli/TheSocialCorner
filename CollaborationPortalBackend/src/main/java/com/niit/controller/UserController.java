@@ -32,18 +32,24 @@ public class UserController {
 	@RequestMapping(value="/login/", method=RequestMethod.POST)
 	public ResponseEntity<User> validateUser(@RequestBody User user, HttpServletRequest request, HttpSession session)
 	{
-		log.debug("Starting Validate Method");
+		System.out.println("Starting Validate Method");
+	
 		String username=user.getUsername();
 		String password=user.getPassword();
+		
+		System.out.println("Username is"+username+"Password is"+password);
+		
 		boolean xUser=userDAOImpl.validate(username, password);
 		if(xUser==false)
-		{
+		{	
+			System.out.println("Invalid credentials");
 			user.setErrorcode("404");
 			user.setErrormessage("Invalid Username or Password!!");
 			return new ResponseEntity<User>(HttpStatus.OK);
 		}
 		else
 		{
+			System.out.println("Valid Credentials!");
 			session.setAttribute("username", username);
 			session.setAttribute("role", user.getRole());
 			user.setIsOnline('Y');
@@ -58,8 +64,8 @@ public class UserController {
 	@RequestMapping(value="/register/",method=RequestMethod.POST)
 	public ResponseEntity<User> registerUser(@RequestBody User user)
 	{
-		log.debug("Starting saveUser Method"+ user);
-		if(userDAOImpl.getUsername(user.getUsername())==true)
+		System.out.println("Entring registerUser method in controller");
+		/*if(userDAOImpl.getUsername(user.getUsername())==true)
 		{
 			user.setStatus('N');
 			user.setIsOnline('N');
@@ -84,13 +90,24 @@ public class UserController {
 			user.setErrorcode("404");
 			user.setErrormessage("User already exist with UserID"+ user.getUsername());
 			return new ResponseEntity<User>(HttpStatus.OK);
+		}*/
+		boolean x=userDAOImpl.saveUser(user);
+		if(x==true)
+		{
+			System.out.println("successful");
 		}
+		else
+		{
+				System.out.println("unsuccessful");
+			
+		}
+		return new ResponseEntity<User>(HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/getUsers",method=RequestMethod.GET)
 	public ResponseEntity<List<User>> getAllUsers(HttpSession session){
 		String username=(String)session.getAttribute("username");
-		List<User> users=userDAOImpl.getAllUsers(username);
+		List<User> users=userDAOImpl.getAllUsers();
 		if(username==null)
 		{
 			user.setErrorcode("404");

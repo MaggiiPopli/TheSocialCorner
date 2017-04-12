@@ -87,8 +87,8 @@ form.login .remember-forgot
                 <p class="form-title">
                     Login</p>
                 <form action="" ng-submit="ctrl.login()" class="login" method="post">
-                <input type="text" name="username" placeholder="Username" />
-                <input type="password" name="password" placeholder="Password" />
+                <input type="text" name="username" ng-model="ctrl.user.username" placeholder="Username" />
+                <input type="password" name="password" ng-model="ctrl.user.password" placeholder="Password" />
                 <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
                 <div class="remember-forgot">
                     <div class="row">

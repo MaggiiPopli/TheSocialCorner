@@ -10,5 +10,5 @@ public interface UserDAO {
 	
 	public boolean saveUser(User u);
 	
-	public List<User> getAllUsers(String username);
+	public List<User> getAllUsers();
 }
