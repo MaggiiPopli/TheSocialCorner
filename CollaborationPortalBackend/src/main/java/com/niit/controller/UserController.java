@@ -104,16 +104,16 @@ public class UserController {
 		return new ResponseEntity<User>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/getUsers",method=RequestMethod.GET)
+	@RequestMapping(value="/getUsers/",method=RequestMethod.GET)
 	public ResponseEntity<List<User>> getAllUsers(HttpSession session){
 		String username=(String)session.getAttribute("username");
 		List<User> users=userDAOImpl.getAllUsers();
-		if(username==null)
+		/*if(username==null)
 		{
 			user.setErrorcode("404");
 			user.setErrormessage("Data not found");
 			users.add(user);
-		}
+		}*/
 		
 		
 		return new ResponseEntity<List<User>>(users,HttpStatus.OK);

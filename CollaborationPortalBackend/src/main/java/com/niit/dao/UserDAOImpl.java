@@ -85,8 +85,9 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 		public List<User> getAllUsers() {
+			System.out.println("Entering getAllUsers method");
 			Session session = sessionFactory.openSession();
-			Query query=session.createQuery("from User");
+			Query query=session.createQuery("select username from User");
 			// Transaction tx = session.beginTransaction();
 			/*SQLQuery query=session.createSQLQuery("select * from l_user where username in (select username from l_user where username!=? minus(select friend_name from l_friend where username=? union select username from l_friend where friend_name=?))");*/
 			//query.setString("username", username);

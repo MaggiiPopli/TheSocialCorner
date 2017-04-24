@@ -1,5 +1,5 @@
                 
-<div class="container"style="margin-top:50px; margin-left:40%;" ng-app="myApp" ng-controller="UserController as ctrl">
+<div class="container"style="margin-top:50px; margin-left:40%;" ng-controller="UserController as ctrl">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
             <legend ><a  href="http://www.jquery2dotnet.com"><i style="color:#f4d03f" class="glyphicon glyphicon-globe"></i></a>  Sign up!</legend>
@@ -28,11 +28,11 @@
             
             <label  for="">Gender :&nbsp;</label>
             <label class="radio-inline">
-                <input type="radio" name="gender" id="inlineCheckbox1" value="male" />
+                <input type="radio" name="gender" ng-model="ctrl.user.gender" id="inlineCheckbox1" value="male" />
                 Male
             </label>
             <label class="radio-inline">
-                <input  type="radio" name="gender" id="inlineCheckbox2" value="female" />
+                <input  type="radio" name="gender" ng-model="ctrl.user.gender" id="inlineCheckbox2" value="female" />
                 Female
             </label>
             <br />
