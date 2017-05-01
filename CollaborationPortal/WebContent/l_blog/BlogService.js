@@ -76,7 +76,7 @@ app.factory('BlogService', ['$http', '$q','$rootScope', function($http, $q,$root
      console.log("failure ")
     });
 	 //return $http.post(REST_SERVICE_URI+'/createblog/',blog);
- }
+ },
 	 /*.then(function(response){
 		 console.log('blog created successfully');
 		 return response.data;
@@ -101,5 +101,21 @@ app.factory('BlogService', ['$http', '$q','$rootScope', function($http, $q,$root
       errorCallbackFn(data);
     }); */
  
+ 
+ 
+ getBlog:function(id){
+	return $http.post(REST_SERVICE_URI+'/getblog/'+blog)
+	.then(function(response){
+		$rootScope.selectedBlog=response.data;
+		return response.data;
+	},
+	function(errResponse){
+		console.error('Error while getting blog');
+		return $q.reject(errResponse);
+	}
+	);
  }
+	 
+ };
+
  }]);

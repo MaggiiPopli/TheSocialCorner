@@ -1,107 +1,247 @@
 package com.niit.dao;
 
+
 import java.util.List;
+
+
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.niit.model.User;
 
-@Repository
-public class UserDAOImpl implements UserDAO{
-
+@Repository("UserDAO")
+public class UserDAOImpl implements UserDAO {
+	
+private static Logger log=LoggerFactory.getLogger(UserDAOImpl.class);
+	
 	@Autowired
-	SessionFactory sessionFactory;
-	
-	
-	public UserDAOImpl(SessionFactory sessionFactory)
+	private SessionFactory sessionFactory;
+	public Session getSession()
 	{
-		this .sessionFactory=sessionFactory;
+		return sessionFactory.openSession();
 	}
-	
-	
-	public boolean validate(String username, String password) {
-		// TODO Auto-generated method stub
-		System.out.println("INSIDE USER DAO IMPL VALIDATE"+username+" "+password);
-		String hql= "select username from User where username=:username and password=:password";
-		Query q=sessionFactory.openSession().createQuery(hql);
-		q.setParameter("username", username);
-		q.setParameter("password", password);
+@Autowired
+User user;
 
-	
-		@SuppressWarnings("unchecked")
-		List<User> l=q.list();
-		System.out.println("list is "+l);
-		if(l.size()>0)
-		{
-			return true;
-		}
-		else
-		{
-		return false;
-		}
+	public User validate(String username, String password) {
+		log.debug("Starting of the Method USERDAOIMPL :: VALIDATE");
+		Session session=getSession();
+		//Transaction tx=session.beginTransaction();
+		/*boolean userfound=false;*/
+		String sql_query="from User where username=:username and password=:password ";
+		  Query query=session.createQuery(sql_query);
+		  query.setParameter("username", username);
+		  query.setParameter("password", password);
+		  /*query.setParameter("status", status);*/
+		 // query.setParameter("role", role);
+		  List<User> list=query.list();
+		  System.out.println("List value:"+list);
+		  if((list!=null)&&(list.size()>0)){
+		  session.close();
+		  log.debug("Ending of the Method USERDAOIMPL :: VALIDATE");
+		  return list.get(0);
+		  }
+		  else{
+			  user.setErrorcode("404");
+				return null;  
+		  }
+			
 		
 	}
 
-	public boolean saveUser(User u) {
-		// TODO Auto-generated method stub
-		System.out.println("Entring Save User Method");
-		try{
-		Session sess=sessionFactory.openSession();
-		Transaction tx=sess.beginTransaction();
-		sess.save(u);
-		tx.commit();
-		sess.close();
-		return true;
-		}
-		catch(Exception ex)
-		{
-			System.out.println("Exception"+ex);
+	public boolean insertUser(User user) {
+		
+		try {
+			log.debug("Starting of the Method USERDAOIMPL :: INSERTUSER");
+			 Session session = getSession();
+			  Transaction tx = session.beginTransaction();
+			  session.saveOrUpdate(user);
+			  tx.commit();
+			 /* Serializable username = session.getIdentifier(user);*/
+			  session.close();
+			  log.debug("Ending of the Method USERDAOIMPL :: INSERTUSER");
+			  return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return false;
 		}
+		 
+		
+	}
+
+	public void updateUser(User user) {
+		log.debug("Starting of the Method USERDAOIMPL::UPDATEUSER");
+		log.debug("ISONLINE VALUE IS [BEFORE UPDATE]" + user.getIsonline());
+		Session session=getSession();
+		/*User existingUser=(User)session.get(User.class, user.getUsername());
+		//update online status as true
+		existingUser.setIsonline(user.getIsonline());;*/ 
+
+		session.update(user);
+		session.flush();
+		session.close();
+		log.debug("ISONLINE VALUE IS [AFTER UPDATE] " + user.getIsonline());
+		log.debug("Starting of the Method USERDAOIMPL::UPDATEUSER");
+		
+	}
+
+	public List<User> list() {
+		log.debug("Starting of the USERDAO Method GETUSERLIST");
+		Session session = getSession();
+		// Transaction tx = session.beginTransaction();
+		String s = "from User";
+		Query query = session.createQuery(s);
+		List<User> b = query.list();
+		// tx.commit();
+		session.close();
+		log.debug("Ending of the USERDAO Method GETUSERLIST");
+		return b;
+	}
+
+	public User get(String username, String password) {
+		
+		return null;
 	}
 
 
-	public boolean getUsername(String username) {
-		// TODO Auto-generated method stub
-		String hql="select * from User where username=:username";
-		Session sess=sessionFactory.openSession();
-		Query q=sess.createQuery(hql);
-		q.setParameter("username", username);
-		List<User> l=q.list();
-		if(l.size()>0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+
+	public void setOnline(String username) {
+		log.debug("Starting of the USERDAO Method SETONLINE");
+		Session session = getSession();
+		 Transaction tx = session.beginTransaction();
+		String s = "update User set isonline='Y' where username='"+username+"'";
+		log.debug("String value"+s);
+		Query query = session.createQuery(s);
+		query.executeUpdate();
+		 tx.commit();
+		session.close();
+		log.debug("Ending of the USERDAO Method SETONLINE");
+		
+		
+		
 	}
 
-		public List<User> getAllUsers() {
-			System.out.println("Entering getAllUsers method");
-			Session session = sessionFactory.openSession();
-			Query query=session.createQuery("select username from User");
-			// Transaction tx = session.beginTransaction();
-			/*SQLQuery query=session.createSQLQuery("select * from l_user where username in (select username from l_user where username!=? minus(select friend_name from l_friend where username=? union select username from l_friend where friend_name=?))");*/
-			//query.setString("username", username);
-			List<User> users=query.list();
-			System.out.println("USER DETAILS"+users);
-			System.out.println("Getall users in userdao"+users);
-			// tx.commit();
+	public void setOffLine(String username) {
+		log.debug("Starting of the USERDAO Method SETOFFLINE");
+		Session session = getSession();
+		 Transaction tx = session.beginTransaction();
+		String s = "update User set isonline='N' where username='"+username+"'";
+		log.debug("String value"+s);
+		Query query = session.createQuery(s);
+		query.executeUpdate();
+		 tx.commit();
+		session.close();
+		log.debug("Ending of the USERDAO Method SETOFFLINE");
+		
+	}
+
+	public User getUsername(String username) {
+log.debug("Staring of the USERDAO Method getUsername");
+		
+		Session session = getSession();
+		//Transaction tx=session.beginTransaction();
+		 User u=session.get(User.class,username);
+		session.close();
+		log.debug("Ending of the USERDAO Method getUsername");
+		return u;
+	}
+
+	public void Update(User user) {
+	
+		log.debug("Starting of the USERAO Method UPDATEUSERDETAILS");
+		try {
+			Session session = getSession();
+			Transaction tx = session.beginTransaction();
+			session.update(user);
+			tx.commit();
 			session.close();
-			return users;
-		}
+			log.debug("Ending of the USERAO Method UPDATEUSERDETAILS");
 		
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+	}
+	
+	
+	private Integer getMaxId()
+	{
+		Integer maxid=1;
+		try {
+			Session session=getSession();
+			
+			String hql="select max(id) from Friend";
+			Query query=session.createQuery(hql);
+			maxid=(Integer)query.uniqueResult();
+			
+		} catch (Exception e) {
+			maxid=1;
+			e.printStackTrace();
+		}
+		return maxid+1;
+	}
+	
+	
 
+	/*public void sendFriendRequest(String username, String friendname) {
+		log.debug("Starting of the USERAO Method SENDFRIENDREQUEST");
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		Friend friend=new Friend();
+		friend.setFriend_name(friendname);
+		friend.setUsername(username);
+		friend.setFriend_request('P');
+		friend.setIs_online('N');
+		friend.setId(getMaxId());
+		session.save(friend);
+		tx.commit();
+		session.close();
+		log.debug("Ending of the USERAO Method SENDFRIENDREQUEST");
+	}*/
 
-
+	/*public List<User> getAllUsers(String username) {
+		log.debug("Starting of the USERDAO Method GETALLUSERLIST");
+		Session session = getSession();
+		// Transaction tx = session.beginTransaction();
+		SQLQuery query=session.createSQLQuery("select * from l_user where username in (select username from l_user where username!=? minus(select friend_name from l_friend where username=? union select username from l_friend where friend_name=?))");
+		query.setString(0, username);
+		query.setString(1, username);
+		query.setString(2, username);
+		query.addEntity(User.class);
+		List<User> users=query.list();
+		System.out.println(users);
+		System.out.println("Getall users in userdao"+users);
+		// tx.commit();
+		session.close();
+		log.debug("Ending of the USERDAO Method GETALLUSERLIST");
+		return users;
+	}*/
+	
+	public List<User> getAllUsers(String username) {
+		log.debug("Starting of the USERDAO Method GETALLUSERLIST");
+		Session session = getSession();
+		// Transaction tx = session.beginTransaction();
+		SQLQuery query=session.createSQLQuery("select * from User");
+		/*query.setString(0, username);
+		query.setString(1, username);
+		query.setString(2, username);
+		query.addEntity(User.class);*/
+		List<User> users=query.list();
+		System.out.println(users);
+		System.out.println("Getall users in userdao"+users);
+		// tx.commit();
+		session.close();
+		log.debug("Ending of the USERDAO Method GETALLUSERLIST");
+		return users;
+	}
 	
 
 }

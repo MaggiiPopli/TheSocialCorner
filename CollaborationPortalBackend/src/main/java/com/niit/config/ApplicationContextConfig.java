@@ -16,6 +16,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.model.Blog;
+import com.niit.model.BlogComment;
 import com.niit.model.User;
 
 @ComponentScan("com.niit")
@@ -56,6 +57,7 @@ public class ApplicationContextConfig {
 	    sessionBuilder.addProperties(getHibernateProperties());
 	    sessionBuilder.addAnnotatedClasses(User.class);
 	    sessionBuilder.addAnnotatedClasses(Blog.class);
+	    sessionBuilder.addAnnotatedClasses(BlogComment.class);
 
 	    return sessionBuilder.buildSessionFactory();
 	}

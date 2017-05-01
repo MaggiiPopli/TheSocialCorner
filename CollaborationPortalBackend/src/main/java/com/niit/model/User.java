@@ -2,25 +2,31 @@ package com.niit.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
-
+import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Component
-public class User extends Error{
-
+public class User extends Error {
 	@Id
 	private String username;
 	private String name;
-	private String email_id;
-	private String gender;
+	private String email;
 	private String password;
-	private String contact;
+	private String mobile;
 	private String address;
+	//n-new,r-reject,a-accept
 	private char status;
+	//student,alumni,admin,employee
 	private String role;
 	private String reason;
-	private char isOnline;
+	//y-online, n-offline
+	private char isonline;
+	
+	@Transient
+	private MultipartFile file;
 	
 	
 	public String getUsername() {
@@ -35,18 +41,11 @@ public class User extends Error{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmail_id() {
-		return email_id;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmail_id(String email_id) {
-		this.email_id = email_id;
-	}
-	
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPassword() {
 		return password;
@@ -54,11 +53,11 @@ public class User extends Error{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getContact() {
-		return contact;
+	public String getMobile() {
+		return mobile;
 	}
-	public void setContact(String contact) {
-		this.contact = contact;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 	public String getAddress() {
 		return address;
@@ -84,19 +83,25 @@ public class User extends Error{
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public char getIsOnline() {
-		return isOnline;
+	public char getIsonline() {
+		return isonline;
 	}
-	public void setIsOnline(char isOnline) {
-		this.isOnline = isOnline;
+	public void setIsonline(char isonline) {
+		this.isonline = isonline;
+	}
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", name=" + name + ", email_id=" + email_id + ", gender=" + gender
-				+ ", password=" + password + ", contact=" + contact + ", address=" + address + ", status=" + status
-				+ ", role=" + role + ", reason=" + reason + ", isOnline=" + isOnline + "]";
+		return "User [username=" + username + ", name=" + name + ", email=" + email + ", password=" + password
+				+ ", mobile=" + mobile + ", address=" + address + ", status=" + status + ", role=" + role + ", reason="
+				+ reason + ", isonline=" + isonline + ", file=" + file + "]";
 	}
 	
-	
-	
+
 }

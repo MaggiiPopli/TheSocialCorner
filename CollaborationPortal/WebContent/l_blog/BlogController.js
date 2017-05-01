@@ -131,6 +131,9 @@ app.controller('BlogController', ['$scope','$location', 'BlogService', function(
 		);
 	};
 	
+	
+	
+	
 	 /*self.reset=function(){
       	  console.log('resetting the form',self.blog);
       	  self.blog={
@@ -177,7 +180,7 @@ app.controller('BlogController', ['$scope','$location', 'BlogService', function(
        		
        		//calling the method when it will be exceute
 	self.fetchAllBlogs();
-       		
+    */   		
        		self.getSelectedBlog = getBlog
        		function getBlog(id){
           		console.log("--.getting blog:"+id)
@@ -193,5 +196,5 @@ app.controller('BlogController', ['$scope','$location', 'BlogService', function(
           		}
           	);
           		};
-	*/
+	
 }]);
