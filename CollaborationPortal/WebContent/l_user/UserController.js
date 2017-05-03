@@ -14,14 +14,11 @@ app.controller('UserController', ['$scope', 'UserService','$rootScope','$locatio
     		isonline:'',
     		errorcode:'',
     		errormessage:''
-    		
-    		
-    
     
     };
-    self.users=[];
     
-    /*$rootScope.loggedIn='';*/
+    $rootScope.loggedIn=''; 
+    self.users=[];
     
     console.log('INSIDE USER CONTROLLER')
     

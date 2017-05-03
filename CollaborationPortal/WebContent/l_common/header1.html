@@ -1,22 +1,16 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
 <script>
     $(document).ready(function () {
         $('.dropdown-toggle').dropdown();
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
-   	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
-   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-cookies.min.js"></script>
+ 
+<div id="wrapper" ng-app="myApp" ng-controller="UserController as ctrl" >
 
-<div ng-show="loggedIn">Welcome W </div>
-<div ng-show="!loggedIn">Welcome S </div>
-
-
-<div ng-app="myApp">
-<!-- <div ng-include src="'l_common/header.html'"></div> -->
 <div id="header-wrapper" style="background:  url(lib/image/img03.png) repeat;">
-
 				<div class="container">
 					<div id="header" >
 						<div id="logo">
@@ -57,14 +51,14 @@
 							<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" >Friends<span class="caret"></span></a>
 							<ul class="dropdown-menu" >
 							<li><a href="#/search_friend" >View User Details</a></li>
-							<li  ><a ng-href="#/friend_list" >List of Friends</a></li>
-							<li  ><a ng-href="#/pending_request"  >Pending Friends Request</a></li>
+							<li  ><a ng-href="#/friend_list"  >List of Friends</a></li>
+							<li  ><a ng-href="#/pending_request" >Pending Friends Request</a></li>
 							</ul>
 							</li>
 							
 							<!-- <li><a href="#/create_event" >Events</a></li> -->
 							<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" >Job<span class="caret"></span></a>
-							<ul class="dropdown-menu" >
+							<ul class="dropdown-menu">
 							<li><a href="#/post_job" >Post Job</a></li>
 							<li ><a href="#/search_job"  >Search Job</a></li>
 							<li ><a href="#/view_applied_job" >View Applied Job</a></li>
@@ -77,11 +71,12 @@
 							
 							</ul>
 							</li> -->
-			
 							<li><a href="#/contactus" >ContactUs</a></li>
-     
-     </ul>
-      <div ng-show="!loggedIn" >
+    </ul>
+  
+ <div >
+ 	
+ <div class="current_page_item" ng-show="!loggedIn" >
     <ul class="nav navbar-nav navbar-right">
     <li style="text-align: right;"> <a href="#/login" style="text-align: right;">
     <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -92,7 +87,7 @@
 	</li>
     </ul>
    </div>
- <div ng-show="loggedIn">
+ <div class="current_page_item" ng-show="loggedIn">
      <ul class="nav navbar-nav navbar-right">
     <!-- <li style="text-align: right;"> 
     <span class="glyphicon glyphicon-log-in"></span> Welcome:{{currentUser.username}}</li>
@@ -110,8 +105,14 @@
     
     </ul>
   </div>
-     </div>
+    </div>
+    </div>
     
-     </nav>
-     </div>
-     </div>
+   
+</nav>
+				</div>
+				
+		
+				</div>
+				</div>
+

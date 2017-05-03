@@ -3,6 +3,7 @@ package com.niit.dao;
 import java.util.List;
 
 import com.niit.model.Blog;
+import com.niit.model.BlogComment;
 
 public interface BlogDAO {
 
@@ -20,9 +21,14 @@ public interface BlogDAO {
 	
 	public List<Blog> getBlogbyUsername(String username);
 	
-	//view blog
-	//editblog, delete blog
-	//getblogbyId where blog_id=:blog_id
-	//getblogbyUsername select * from blog where username=:username
+	public boolean insertBlogComment(BlogComment blogComment, String username, int blog_id);
+	
+	public boolean updateBlogComment(BlogComment blogComment);
+	
+	public void deleteBlogComment(int blog_id);
+	
+	public BlogComment getBlogCommentbyId(int blog_id);
+	
+	public List<BlogComment> getBlogCommentList();
 	
 }
