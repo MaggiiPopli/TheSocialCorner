@@ -1,7 +1,9 @@
 package com.niit.dao;
 
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -74,37 +76,84 @@ public class ForumDAOImpl implements ForumDAO{
 
 	public List<Forum> getForumList() {
 		// TODO Auto-generated method stub
-		return null;
+		Session sess= sessionFactory.openSession();
+		Query query = sess.createQuery("from Forum");
+		List<Forum> b = query.list();
+		sess.close();
+		return b;
 	}
+
 
 	public Forum getForumByID(int forum_id) {
 		// TODO Auto-generated method stub
-		return null;
+		Session sess=sessionFactory.openSession();
+		Forum b=sess.get(Forum.class, forum_id);
+		sess.close();
+		return b;
 	}
 
 	public boolean insertForumComment(ForumComment forumcomment, String username, int forum_id) {
 		// TODO Auto-generated method stub
-		return false;
+		try {
+			Session sess=sessionFactory.openSession();
+			Transaction tx = sess.beginTransaction();
+			//forumcomment.setId(id); ??
+			forumcomment.setForumid(forum_id);
+			forumcomment.setUsername(username);
+			forumcomment.setComment_date(new Date());
+			sess.save(forumcomment);
+			tx.commit();
+			sess.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+
 	}
 
 	public boolean updateForumComment(ForumComment forumcomment) {
 		// TODO Auto-generated method stub
-		return false;
+		try {
+			Session sess=sessionFactory.openSession();
+			Transaction tx = sess.beginTransaction();
+			sess.update(forumcomment);
+			tx.commit();
+			sess.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
 	}
 
 	public void deleteForumComment(int forum_id) {
 		// TODO Auto-generated method stub
-		
+		Session sess=sessionFactory.openSession();
+		Transaction tx=sess.beginTransaction();
+		ForumComment fc=sess.get(ForumComment.class, forum_id);
+		sess.delete(fc);
+		tx.commit();
+		sess.close();
 	}
 
 	public ForumComment getForumCommentByID(int forum_id) {
 		// TODO Auto-generated method stub
-		return null;
+		Session sess=sessionFactory.openSession();
+		ForumComment b=sess.get(ForumComment.class, forum_id);
+		sess.close();
+		return b;
 	}
 
 	public List<ForumComment> getAllForumComment() {
 		// TODO Auto-generated method stub
-		return null;
+		Session sess=sessionFactory.openSession();
+		Transaction tx = sess.beginTransaction();
+		Query query = sess.createQuery("from ForumComment");
+		List<ForumComment> f = query.list();
+		tx.commit();
+		sess.close();
+		return f;
 	}
 	
 	

@@ -51,6 +51,11 @@ public class Blog extends Error{
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	@Override
+	public String toString() {
+		return "Blog [blog_id=" + blog_id + ", blogTitle=" + blogTitle + ", description=" + description
+				+ ", date_of_creation=" + date_of_creation + ", username=" + username + "]";
+	}
 	
 	
 	

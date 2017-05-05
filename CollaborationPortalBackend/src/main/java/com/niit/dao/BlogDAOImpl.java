@@ -25,7 +25,7 @@ public class BlogDAOImpl implements BlogDAO{
 	}
 
 	
-	/*public boolean insertBlog(Blog blog) {
+	public boolean insertBlog(Blog blog) {
 		// TODO Auto-generated method stub
 		try{
 		Session sess=sessionFactory.openSession();
@@ -39,22 +39,6 @@ public class BlogDAOImpl implements BlogDAO{
 		
 			System.out.println("Exception"+ex);
 			return false;
-		}
-		
-	}*/
-	
-	public void insertBlog(Blog blog) {
-		// TODO Auto-generated method stub
-		try{
-		Session sess=sessionFactory.openSession();
-		Transaction tx=sess.beginTransaction();
-		sess.save(blog);
-		tx.commit();
-		sess.close();
-		}
-		catch(Exception ex){
-		
-			System.out.println("Exception"+ex);
 		
 		}
 		
@@ -71,12 +55,12 @@ public class BlogDAOImpl implements BlogDAO{
 	}
 
 
-	public boolean updateBlog(Blog blog) {
+	public boolean updateBlogbyID(int blog_id) {
 		// TODO Auto-generated method stub
 		try{
 			Session sess=sessionFactory.openSession();
 			Transaction tx=sess.beginTransaction();
-			sess.update(blog);
+			sess.update(blog_id);
 			tx.commit();
 			sess.close();
 			return true;
@@ -151,7 +135,6 @@ public class BlogDAOImpl implements BlogDAO{
 		try{
 			Session sess=sessionFactory.openSession();
 			Transaction tx=sess.beginTransaction();
-			//blogComment.setComment_id(comment_id);//??
 			blogComment.setBlog_id(blog_id);
 			blogComment.setUsername(username);
 			blogComment.setComment_date(new Date());
@@ -216,6 +199,18 @@ public class BlogDAOImpl implements BlogDAO{
 		tx.commit();
 		sess.close();
 		return l;
+	}
+
+
+	public List<Blog> getAllBlogs() {
+		// TODO Auto-generated method stub
+		Session sess=sessionFactory.openSession();
+		Transaction tx=sess.beginTransaction();
+		Query query=sess.createQuery("from Blog");
+		List<Blog> b=query.list();
+		tx.commit();
+		sess.close();
+		return b;
 	}
 
 }

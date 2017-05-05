@@ -7,17 +7,19 @@ import com.niit.model.BlogComment;
 
 public interface BlogDAO {
 
-	public void insertBlog(Blog blog);
+	public boolean insertBlog(Blog blog);
 	
 	public List<Blog> viewBlog();
 	
-	public boolean updateBlog(Blog blog);
+	public boolean updateBlogbyID(int blog_id);
 	
 	public boolean editBlog(int blog_id);
 	
 	public boolean deleteBlog(int blog_id);
 	
 	public Blog getBlogbyId(int blog_id);
+	
+	public List<Blog> getAllBlogs();
 	
 	public List<Blog> getBlogbyUsername(String username);
 	

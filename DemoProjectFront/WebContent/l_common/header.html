@@ -1,0 +1,107 @@
+
+<div id="wrapper" ng-app="myApp" ng-controller="UserController as ctrl" >
+
+<div id="header-wrapper" style="background:  url(lib/image/img03.png) repeat;">
+				<div class="container">
+					<div id="header" >
+						<div id="logo">
+							<h1><a href="#">LetzChaat.com</a></h1>
+						</div>
+					</div>
+				</div>
+				<div class="container">
+					
+					<nav class="navbar navbar-inverse " style="color:white;font: bold;">
+  <div class="container-fluid" >
+  
+    <ul class="nav navbar-nav" >
+   
+     <li class="current_page_item" ng-show="!loggedIn" >
+      
+     <a href="index.html" >Home</a>
+     </li>
+     
+     <li class="current_page_item" ng-show="loggedIn">
+        <a href="#/home" >Home</a>
+       
+     </li>
+    							<li><a href="#/aboutus">AboutUs</a></li>
+							
+							<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" >Blogs<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							<li><a href="#/createBlog" >Create Blog</a></li>
+							<li ><a href="#/listBlog" >View Blog</a></li>
+							</ul>
+							</li>
+							<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" >Forum<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							<li><a href="#/create_forum" >Create Forum</a></li>
+							<li ><a href="#/list_forum"  >View Forum</a></li>
+							</ul>
+							</li>
+							<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" >Friends<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							<li><a href="#/search_friend" >View User Details</a></li>
+							<li  ><a ng-href="#/friend_list" >List of Friends</a></li>
+							<li  ><a ng-href="#/pending_request" >Pending Friends Request</a></li>
+							</ul>
+							</li>
+							
+							<!-- <li><a href="#/create_event" >Events</a></li> -->
+							<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" >Job<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							<li><a href="#/post_job" >Post Job</a></li>
+							<li ><a href="#/search_job" >Search Job</a></li>
+							<li ><a href="#/view_applied_job">View Applied Job</a></li>
+							</ul>
+							</li>
+							<li><a href="#/chat" >Chat</a></li>
+							<!-- <li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" >Admin<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							<li><a href="#/manage_users" >Manage Users</a></li>
+							
+							</ul>
+							</li> -->
+							<li><a href="#/contactus" >ContactUs</a></li>
+    </ul>
+  
+ <div >
+ <div ng-show="!loggedIn" >
+    <ul class="nav navbar-nav navbar-right">
+    <li style="text-align: right;"> <a href="#/login" style="text-align: right;">
+    <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	<li style="text-align: right;">
+	<a href="#/registration"  style="text-align: right;">
+		<span class="glyphicon glyphicon-user"></span>
+	Sign Up</a>
+	</li>
+    </ul>
+   </div>
+ <div ng-show="loggedIn">
+     <ul class="nav navbar-nav navbar-right">
+    <!-- <li style="text-align: right;"> 
+    <span class="glyphicon glyphicon-log-in"></span> Welcome:{{currentUser.username}}</li>
+    <li style="text-align: right;"> <a ng-href="#/logout" ng-click="ctrl.logout()" style="text-align: right;">
+    <span class="glyphicon glyphicon-log-in"></span> Logout</a></li> -->
+    
+    <li class="dropdown" style="text-align: right;"><a class="dropdown-toggle" data-toggle="dropdown" > Welcome: {{currentUser.username}}<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+							<li><a href="#/myprofile" >My Profile</a></li>
+							<li ><a href="#/logout" ng-click="ctrl.logout()" style="text-align: right;">Logout</a></li>
+							</ul>
+							</li>
+    
+    
+    </ul>
+  </div>
+    </div>
+    </div>
+  
+   
+</nav>
+				</div>
+				
+		
+				</div>
+				</div>
+

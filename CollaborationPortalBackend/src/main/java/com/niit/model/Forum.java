@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class Forum {
+public class Forum extends Error{
 	
 	@Id
 	private int forum_id;
