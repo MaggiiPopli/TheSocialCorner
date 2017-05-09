@@ -3,6 +3,8 @@ package com.niit.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class Forum extends Error{
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int forum_id;
 	private String username;
 	private String forum_topic;

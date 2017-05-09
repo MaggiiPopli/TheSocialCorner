@@ -12,18 +12,18 @@ import org.springframework.stereotype.Component;
 public class Job extends Error{
 
 	@Id
-	private String job_id;
+	private String jobid;
 	private String job_title;
 	private String qualification;
 	private char status;
 	private String description;
 	private Date date_time;
 	
-	public String getJob_id() {
-		return job_id;
+	public String getJobid() {
+		return jobid;
 	}
-	public void setJob_id(String job_id) {
-		this.job_id = job_id;
+	public void setJob_id(String jobid) {
+		this.jobid = jobid;
 	}
 	public String getJob_title() {
 		return job_title;

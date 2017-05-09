@@ -60,8 +60,8 @@ app.factory('BlogService', ['$http', '$q','$rootScope', function($http, $q,$root
 	 
 	 );
  },
- updateBlog:function(blogid){
-	 return $http.put(REST_SERVICE_URI+'/updateblog/'+blogid)
+ updateBlog:function(blog_id){
+	 return $http.put(REST_SERVICE_URI+'/updateblog/'+blog_id)
 	 .then(function(response){
 		 return response.data;
 	 },

@@ -32,7 +32,7 @@ public class ForumController {
 	ForumComment forumcomment; 
 	
 	
-	@RequestMapping(value="/createforum",method=RequestMethod.POST)
+	@RequestMapping(value="/createforum/",method=RequestMethod.POST)
 	public ResponseEntity<Forum> createForum(@RequestBody Forum forum, HttpSession session, HttpServletRequest request)
 	{
 		session=request.getSession(false);
@@ -97,6 +97,7 @@ public class ForumController {
 	{
 		session=request.getSession(false);
 		String username=(String)session.getAttribute("username");
+		System.out.println("inside createforumcontroller"+forumcomment+"forum id= "+forum_id);
 		
 			
 			if(forumDAOImpl.insertForumComment(forumcomment,username,forum_id)==true)

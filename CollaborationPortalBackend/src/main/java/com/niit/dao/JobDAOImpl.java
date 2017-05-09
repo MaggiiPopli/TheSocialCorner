@@ -7,30 +7,39 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.niit.model.Job;
 import com.niit.model.JobApplied;
 
+@Repository
 public class JobDAOImpl implements JobDAO{
 	
 	@Autowired
 	SessionFactory sessionFactory;
+	
 	
 	public JobDAOImpl(SessionFactory sessionFactory)
 	{
 		this.sessionFactory=sessionFactory;
 	}
 
-	public List<Job> viewOpenedJobs() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Job getJobDetails(String job_id) {
+	public List<Job> getAllOpenedJobs() {
 		// TODO Auto-generated method stub
 		Session sess=sessionFactory.openSession();
 		Transaction tx=sess.beginTransaction();
-		Job j=sess.get(Job.class, job_id);
+		Query q=sess.createQuery("from Job where status='V'");
+		List<Job> j=q.list();
+		tx.commit();
+		sess.close();
+		return j;
+	}
+
+	public Job getJobDetails(String jobid) {
+		// TODO Auto-generated method stub
+		Session sess=sessionFactory.openSession();
+		Transaction tx=sess.beginTransaction();
+		Job j=sess.get(Job.class, jobid);
 		tx.commit();
 		sess.close();
 		return j;
@@ -100,21 +109,33 @@ public class JobDAOImpl implements JobDAO{
 		}
 	}
 
-	public List<JobApplied> getMyAppliedJobs() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<JobApplied> getMyAppliedJobs(String username) {
+		Session sess=sessionFactory.openSession();
+		Transaction tx=sess.beginTransaction();
+		//??
+		Query query=sess.createQuery("from Job where jobid in(select jobid from JobApplied where username='"+username+"')");
+		List<JobApplied> j=query.list();
+		tx.commit();
+		sess.close();
+		return j;
 	}
 
-	public JobApplied getAppliedJob(String username, String job_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public JobApplied getAppliedJob(String job_id) {
+	public JobApplied getAppliedJob(String username, String jobid) {
 		// TODO Auto-generated method stub
 		Session sess=sessionFactory.openSession();
 		Transaction tx=sess.beginTransaction();
-		JobApplied j=sess.get(JobApplied.class, job_id);
+		Query query=sess.createQuery("from JobApplied where username='"+username+"' and jobid='"+jobid+"'");
+		JobApplied jobapplied=(JobApplied) query.uniqueResult();
+		tx.commit();
+		sess.close();
+		return jobapplied;
+	}
+
+	public JobApplied getAppliedJob(String jobid) {
+		// TODO Auto-generated method stub
+		Session sess=sessionFactory.openSession();
+		Transaction tx=sess.beginTransaction();
+		JobApplied j=sess.get(JobApplied.class, jobid);
 		tx.commit();
 		sess.close();
 		return j;

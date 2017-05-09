@@ -102,17 +102,17 @@ controller : 'BlogController'
  * Forum Mapping
  * */
 
-.when('/create_forum',{
-templateUrl : 'l_forum/create_forum.html',
+.when('/createforum',{
+templateUrl : 'l_forum/createforum.html',
 controller : 'ForumController'
 })
 
-.when('/view_forum',{
-templateUrl : 'l_forum/view_forum.html',
+.when('/viewforum',{
+templateUrl : 'l_forum/viewforum.html',
 controller : 'ForumController'
 })
-.when('/list_forum',{
-templateUrl : 'l_forum/list_forum.html',
+.when('/listforum',{
+templateUrl : 'l_forum/listforum.html',
 controller : 'ForumController'
 })
 

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class JobApplied {
+public class JobApplied extends Error {
 
 	@Id
 	private int id;
 	private String username;
-	private String job_id;
+	private String jobid;
 	private char status;
 	private String remarks;
 	private Date date_applied;
@@ -31,11 +31,11 @@ public class JobApplied {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getJob_id() {
-		return job_id;
+	public String getJobid() {
+		return jobid;
 	}
-	public void setJob_id(String job_id) {
-		this.job_id = job_id;
+	public void setJobid(String jobid) {
+		this.jobid = jobid;
 	}
 	public char getStatus() {
 		return status;

@@ -8,10 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.niit.model.Forum;
 import com.niit.model.ForumComment;
 
+@Repository
 public class ForumDAOImpl implements ForumDAO{
 	
 	
@@ -97,11 +99,16 @@ public class ForumDAOImpl implements ForumDAO{
 		try {
 			Session sess=sessionFactory.openSession();
 			Transaction tx = sess.beginTransaction();
+			ForumComment f=new ForumComment();
+			f.setForumid(forum_id);
 			//forumcomment.setId(id); ??
-			forumcomment.setForumid(forum_id);
-			forumcomment.setUsername(username);
-			forumcomment.setComment_date(new Date());
-			sess.save(forumcomment);
+			//forumcomment.setForumid(forum_id);
+			f.setUsername(username);
+			f.setForum_comment(forumcomment.getForum_comment());
+			f.setComment_date(new Date());
+			
+			System.out.println("FORUM COMMENT DATA "+f);
+			sess.save(f);
 			tx.commit();
 			sess.close();
 			return true;

@@ -125,10 +125,11 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/createblogcomment/{blog_id}",method=RequestMethod.POST)
-	public ResponseEntity<BlogComment> createBlogComment(@RequestBody BlogComment blogcomment,@PathVariable int blog_id, HttpSession session, HttpServletRequest request)
+	public ResponseEntity<BlogComment> createBlogComment(@RequestBody BlogComment blogComment,@PathVariable int blog_id, HttpSession session, HttpServletRequest request)
 	{
 		session=request.getSession(false);
 		String username=(String) session.getAttribute("username");
+		System.out.println("Inside createBlogcomment"+blogComment);
 		if(blogDAOImpl.insertBlogComment(blogComment, username, blog_id)==true)
 		{
 			blogComment.setErrorcode("200");

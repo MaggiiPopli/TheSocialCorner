@@ -67,7 +67,7 @@ self.updateBlog=function(blog_id){
 	 self.edit=function edit(blog_id){
 		 console.log('blogid to be edited',blog_id);
 		 for(var i = 0; i < self.blogs.length; i++){
-	            if(self.blogs[i].blogid === blog_id) {
+	            if(self.blogs[i].blog_id === blog_id) {
 	                self.blog = angular.copy(self.blogs[i]);
 	                break;
 	            }
