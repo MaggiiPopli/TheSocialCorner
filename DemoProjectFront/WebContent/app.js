@@ -116,21 +116,6 @@ templateUrl : 'l_forum/listforum.html',
 controller : 'ForumController'
 })
 
-
-/*
- * Event Mapping
- * */
-
-.when('/create_event',{
-templateUrl : 'l_event/create_event.html',
-controller : 'EventController'
-})
-
-.when('/view_event',{
-templateUrl : 'l_event/view_event.html',
-controller : 'EventController'
-})
-
 /*
  * 
  * Friend Mapping*/
@@ -163,7 +148,7 @@ controller : 'JobController'
 templateUrl : 'l_job/view_applied_job.html',
 controller : 'JobController'
 })
-.when('/view_jobdetails',{
+.when('/viewJobdetails',{
 templateUrl : 'l_job/view_jobdetails.html',
 controller : 'JobController'
 })

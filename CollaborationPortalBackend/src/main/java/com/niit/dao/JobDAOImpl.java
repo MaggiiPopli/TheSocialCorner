@@ -30,6 +30,7 @@ public class JobDAOImpl implements JobDAO{
 		Transaction tx=sess.beginTransaction();
 		Query q=sess.createQuery("from Job where status='V'");
 		List<Job> j=q.list();
+		System.out.println("inside JobDAOIMPL"+j);
 		tx.commit();
 		sess.close();
 		return j;
@@ -80,9 +81,10 @@ public class JobDAOImpl implements JobDAO{
 	public boolean insertJob(Job job) {
 		// TODO Auto-generated method stub
 		try{
+			System.out.println("insertJob in JobDAOImpl"+job);
 			Session sess=sessionFactory.openSession();
 			Transaction tx=sess.beginTransaction();
-			sess.saveOrUpdate(job);
+			sess.save(job);
 			tx.commit();
 			sess.close();
 			return true;
@@ -98,7 +100,7 @@ public class JobDAOImpl implements JobDAO{
 		try{
 			Session sess=sessionFactory.openSession();
 			Transaction tx=sess.beginTransaction();
-			sess.saveOrUpdate(jobapplied);
+			sess.save(jobapplied);
 			tx.commit();
 			sess.close();
 			return true;

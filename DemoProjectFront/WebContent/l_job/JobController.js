@@ -194,7 +194,7 @@ app.controller('JobController',['$scope','$location','$rootScope','JobService' ,
 					errormessage:''
 			};
             
-            $scope.myForm.$setPristine();//reset form
+
 
             
 self.getSelectedJob = getJob

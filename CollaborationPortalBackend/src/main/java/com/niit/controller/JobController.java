@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -131,10 +132,11 @@ public class JobController {
 	
 	
 	@RequestMapping(value="/postjob/",method=RequestMethod.POST)
-	public ResponseEntity<Job> postJob(@PathVariable Job job)
+	public ResponseEntity<Job> postJob(@RequestBody Job job)
 	{
 		job.setStatus('V');
 		job.setDate_time(new Date());
+		System.out.println("job data is: "+job);
 		if(jobDAOImpl.insertJob(job)==false)
 		{
 			job.setErrorcode("404");

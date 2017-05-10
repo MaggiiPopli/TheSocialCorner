@@ -3,6 +3,8 @@ package com.niit.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
@@ -12,17 +14,18 @@ import org.springframework.stereotype.Component;
 public class Job extends Error{
 
 	@Id
-	private String jobid;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int jobid;
 	private String job_title;
 	private String qualification;
 	private char status;
 	private String description;
 	private Date date_time;
 	
-	public String getJobid() {
+	public int getJobid() {
 		return jobid;
 	}
-	public void setJob_id(String jobid) {
+	public void setJob_id(int jobid) {
 		this.jobid = jobid;
 	}
 	public String getJob_title() {
@@ -54,6 +57,12 @@ public class Job extends Error{
 	}
 	public void setDate_time(Date date_time) {
 		this.date_time = date_time;
+	}
+	
+	@Override
+	public String toString() {
+		return "Job [jobid=" + jobid + ", job_title=" + job_title + ", qualification=" + qualification + ", status="
+				+ status + ", description=" + description + ", date_time=" + date_time + "]";
 	}
 	
 	

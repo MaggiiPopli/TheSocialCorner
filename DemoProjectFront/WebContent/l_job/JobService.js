@@ -1,5 +1,5 @@
 'use strict';
-app.factory('JobService',['$http', '$q','$rootScope', function($https, $q, $rootScope){
+app.factory('JobService',['$http', '$q','$rootScope', function($http, $q, $rootScope){
 	
 	var REST_SERVICE_URI='http://localhost:8080/CollaborationPortalBackend';
 	return{
