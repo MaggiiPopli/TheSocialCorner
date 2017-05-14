@@ -74,7 +74,7 @@ app.controller('JobController',['$scope','$location','$rootScope','JobService' ,
             	  .then(
             			  function(d){
             				  self.jobs=d;
-            				  $location.path('#/viewJobDetails')
+            				  $location.path('/viewJobdetails')
             				  console.log('value in Jobs',self.jobs);
             			  },
             			  function(errResponse){
@@ -203,7 +203,7 @@ self.getSelectedJob = getJob
 		JobService.getJob(id)
 		.then(function(d){
 			console.log('getSelectedjob in jobController',self.job)
-			$location.path('/viewJob');
+			$location.path('/viewJobdetails');
 			
 		},
 		function(errResponse){

@@ -52,13 +52,13 @@ public class JobController {
 	}
 	
 	@RequestMapping(value="/getjobdetails/{jobid}",method=RequestMethod.GET)
-	public ResponseEntity<Job> getJobDetails(@PathVariable("jobid") String jobid )
+	public ResponseEntity<Job> getJobDetails(@PathVariable("jobid") int jobid )
 	{
 		Job job=jobDAOImpl.getJobDetails(jobid);
 		return new ResponseEntity<Job> (job,HttpStatus.OK);
 	}
 	
-	private boolean isUserAppliedForTheJob(String username, String jobid)
+	private boolean isUserAppliedForTheJob(String username, int jobid)
 	{
 		if(jobDAOImpl.getAppliedJob(username, jobid)==null)
 			{
@@ -68,7 +68,7 @@ public class JobController {
 			return false;
 	}
 	
-	private JobApplied updateJobAppliedStatus(String username, String jobid, char status)
+	private JobApplied updateJobAppliedStatus(String username, int jobid, char status)
 	{
 		if(isUserAppliedForTheJob(username,jobid))
 		{
@@ -110,21 +110,21 @@ public class JobController {
 	}
 	
 	@RequestMapping(value="/selectuser/{username}/{jobid}",method=RequestMethod.PUT)
-	public ResponseEntity<JobApplied> selectUser(@PathVariable ("username") String username, @PathVariable("jobid") String jobid)
+	public ResponseEntity<JobApplied> selectUser(@PathVariable ("username") String username, @PathVariable("jobid") int jobid)
 	{
 		jobapplied=updateJobAppliedStatus(username,jobid,'S');
 		return new ResponseEntity<JobApplied>(jobapplied,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/callforinterview/{username}/{jobid}",method=RequestMethod.PUT)
-	public ResponseEntity<JobApplied> callForInterview(@PathVariable ("username") String username, @PathVariable ("jobid") String jobid)
+	public ResponseEntity<JobApplied> callForInterview(@PathVariable ("username") String username, @PathVariable ("jobid") int jobid)
 	{
 		jobapplied=updateJobAppliedStatus(username, jobid, 'C');
 		return new ResponseEntity<JobApplied>(jobapplied, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/rejectjobapplied/{username}/{jobid}",method=RequestMethod.PUT)
-	public ResponseEntity<JobApplied> rejectJobApplied(@PathVariable ("username") String username, @PathVariable("jobid") String jobid)
+	public ResponseEntity<JobApplied> rejectJobApplied(@PathVariable ("username") String username, @PathVariable("jobid") int jobid)
 	{
 		jobapplied=updateJobAppliedStatus(username, jobid, 'R');
 		return new ResponseEntity<JobApplied>(jobapplied, HttpStatus.OK);
@@ -150,7 +150,7 @@ public class JobController {
 	}
 	
 	@RequestMapping(value="/applyjob/{jobid}",method=RequestMethod.POST)
-	public ResponseEntity<JobApplied> applyJob(@PathVariable("jobid") String jobid,HttpSession session)
+	public ResponseEntity<JobApplied> applyJob(@PathVariable("jobid") int jobid,HttpSession session)
 	
 	{
 		String username = (String) session.getAttribute("username");
@@ -165,7 +165,7 @@ public class JobController {
 		{
 			if(jobDAOImpl.getAppliedJob(username, jobid)==null)
 			{
-				jobapplied.setJobid(jobid);
+				//jobapplied.setJobid(jobid);
 				jobapplied.setUsername(username);
 				jobapplied.setStatus('N');  //N=>Newly Applied,C=>Call for interview ,S=>selected
 				jobapplied.setDate_applied(new Date(System.currentTimeMillis()));

@@ -36,7 +36,7 @@ public class JobDAOImpl implements JobDAO{
 		return j;
 	}
 
-	public Job getJobDetails(String jobid) {
+	public Job getJobDetails(int jobid) {
 		// TODO Auto-generated method stub
 		Session sess=sessionFactory.openSession();
 		Transaction tx=sess.beginTransaction();
@@ -122,7 +122,7 @@ public class JobDAOImpl implements JobDAO{
 		return j;
 	}
 
-	public JobApplied getAppliedJob(String username, String jobid) {
+	public JobApplied getAppliedJob(String username, int jobid) {
 		// TODO Auto-generated method stub
 		Session sess=sessionFactory.openSession();
 		Transaction tx=sess.beginTransaction();
@@ -133,7 +133,7 @@ public class JobDAOImpl implements JobDAO{
 		return jobapplied;
 	}
 
-	public JobApplied getAppliedJob(String jobid) {
+	public JobApplied getAppliedJob(int jobid) {
 		// TODO Auto-generated method stub
 		Session sess=sessionFactory.openSession();
 		Transaction tx=sess.beginTransaction();

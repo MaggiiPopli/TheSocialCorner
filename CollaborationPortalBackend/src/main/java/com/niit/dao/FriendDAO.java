@@ -7,7 +7,7 @@ import com.niit.model.User;
 
 public interface FriendDAO {
 	
-	public List<Friend> friendList(String username);
+	public List<Friend> getFriendList(String username);
 	public boolean updateFriend(Friend friend);
 	public Friend getFriendRequest(String username, String friend_name);
 	public User getFriendDetails(String friend_name);

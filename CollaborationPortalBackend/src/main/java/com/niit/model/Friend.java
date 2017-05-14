@@ -2,26 +2,29 @@ package com.niit.model;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 import org.springframework.stereotype.Component;
 import javax.persistence.Id;
 
 @Component
 @Entity
-public class Friend {
+public class Friend extends Error {
 
 	@Id
-	private int Id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	private String username;
 	private String friend_name;
 	private char friend_request;
-	private char isOnline;
+	private char is_online;
 	
 	public int getId() {
-		return Id;
+		return id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getUsername() {
 		return username;
@@ -41,11 +44,17 @@ public class Friend {
 	public void setFriend_request(char friend_request) {
 		this.friend_request = friend_request;
 	}
-	public char getIsOnline() {
-		return isOnline;
+	public char getIs_online() {
+		return is_online;
 	}
-	public void setIsOnline(char isOnline) {
-		this.isOnline = isOnline;
+	public void setIs_online(char is_online) {
+		this.is_online = is_online;
+	}
+	
+	@Override
+	public String toString() {
+		return "Friend [id=" + id + ", username=" + username + ", friend_name=" + friend_name + ", friend_request="
+				+ friend_request + ", is_online=" + is_online + "]";
 	}
 	
 	
