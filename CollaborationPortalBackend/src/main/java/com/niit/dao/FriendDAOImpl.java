@@ -56,8 +56,9 @@ public class FriendDAOImpl implements FriendDAO{
 		// TODO Auto-generated method stub
 		Session session=getSession();
 		Transaction tx=session.beginTransaction();
-		Query query=session.createQuery("from Friend where username='"+friend_name+"'and friend name='"+username+"'");
+		Query query=session.createQuery("from Friend where username='"+friend_name+"'and friend_name='"+username+"'");
 		Friend friend=(Friend) query.uniqueResult();
+		System.out.println("Inside getFriend Request"+friend);
 		tx.commit();
 		session.close();
 		return friend;

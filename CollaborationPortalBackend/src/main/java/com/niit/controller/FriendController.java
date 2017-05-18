@@ -37,15 +37,22 @@ public class FriendController {
 	@RequestMapping(value="/pendingusers",method=RequestMethod.GET)
 	public ResponseEntity<List<Friend>> getPendingFriendRequest()
 	{
+		
+		System.out.println("Inside pending users method");
 		String username=(String) session.getAttribute("username");
 		List<Friend> friendList=friendDAOImpl.getFriendList(username);
+		
+		System.out.println("pendinf users"+friendList);
+		
 		if(friendList.isEmpty() || friendList==null)
 		{
+			System.out.println("Inside IF pending users");
 			friend.setErrorcode("404");
 			friend.setErrormessage("No Friends Are Available");
 		}
 		else
 		{
+			System.out.println("Inside ELSE pending users");
 			friend.setErrorcode("200");
 			friend.setErrormessage("Valued retrived Successfully");
 		}

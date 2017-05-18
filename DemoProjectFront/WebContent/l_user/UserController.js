@@ -136,7 +136,8 @@ app.controller('UserController', ['$scope', 'UserService','$rootScope','$locatio
 					.then(
 							function(d) {
 								self.users = d;
-							},
+								console.log(self.users);		
+								},
 							function(errResponse) {
 								console
 										.error('Error while getting Users');
@@ -155,6 +156,7 @@ app.controller('UserController', ['$scope', 'UserService','$rootScope','$locatio
 						console.log(d);
 						self.users=d;
 						alert('Friend request Send')
+						console.log(self.users);
 						self.getAllUsers
 						$location.path('/search_friend')
 				 },

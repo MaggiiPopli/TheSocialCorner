@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.niit.model.Friend;
 import com.niit.model.User;
 
 @Repository("UserDAO")
@@ -191,49 +193,30 @@ log.debug("Staring of the USERDAO Method getUsername");
 	
 	
 
-	/*public void sendFriendRequest(String username, String friendname) {
-		log.debug("Starting of the USERAO Method SENDFRIENDREQUEST");
+	public void sendFriendRequest(String username, String friend_name) {
+		System.out.println("Starting of the USERAO Method SENDFRIENDREQUEST");
 		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		Friend friend=new Friend();
-		friend.setFriend_name(friendname);
+		friend.setFriend_name(friend_name);
 		friend.setUsername(username);
 		friend.setFriend_request('P');
 		friend.setIs_online('N');
-		friend.setId(getMaxId());
 		session.save(friend);
 		tx.commit();
 		session.close();
 		log.debug("Ending of the USERAO Method SENDFRIENDREQUEST");
-	}*/
-
-	/*public List<User> getAllUsers(String username) {
-		log.debug("Starting of the USERDAO Method GETALLUSERLIST");
-		Session session = getSession();
-		// Transaction tx = session.beginTransaction();
-		SQLQuery query=session.createSQLQuery("select * from l_user where username in (select username from l_user where username!=? minus(select friend_name from l_friend where username=? union select username from l_friend where friend_name=?))");
-		query.setString(0, username);
-		query.setString(1, username);
-		query.setString(2, username);
-		query.addEntity(User.class);
-		List<User> users=query.list();
-		System.out.println(users);
-		System.out.println("Getall users in userdao"+users);
-		// tx.commit();
-		session.close();
-		log.debug("Ending of the USERDAO Method GETALLUSERLIST");
-		return users;
-	}*/
+	}
 	
 	public List<User> getAllUsers(String username) {
 		log.debug("Starting of the USERDAO Method GETALLUSERLIST");
 		Session session = getSession();
 		// Transaction tx = session.beginTransaction();
-		SQLQuery query=session.createSQLQuery("select * from User");
-		/*query.setString(0, username);
+		SQLQuery query=session.createSQLQuery("select * from User where username in (select username from User where username!=? minus(select friend_name from Friend where username=? union select username from Friend where friend_name=?))");
+		query.setString(0, username);
 		query.setString(1, username);
 		query.setString(2, username);
-		query.addEntity(User.class);*/
+		query.addEntity(User.class);
 		List<User> users=query.list();
 		System.out.println(users);
 		System.out.println("Getall users in userdao"+users);

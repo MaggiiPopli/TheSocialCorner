@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import com.niit.dao.FriendDAOImpl;
 import com.niit.dao.UserDAOImpl;
 import com.niit.model.User;
 
@@ -36,6 +38,9 @@ public class UserController {
 	
 	@Autowired
 	HttpSession session;
+	
+	@Autowired
+	FriendDAOImpl friendDAOImpl;
 	
 	
 	@RequestMapping(value="/getUsers",method=RequestMethod.GET)
@@ -212,6 +217,114 @@ public class UserController {
 	
 	
 		
+	@RequestMapping(value = "/accept/{username}", method = RequestMethod.GET)
+	public ResponseEntity<User> accept(@PathVariable("username") String username) {
+		log.debug("Starting of the method accept");
+
+		user = updateStatus(username, 'A', "");
+		log.debug("Ending of the method accept");
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/reject/{username}/{reason}", method = RequestMethod.GET)
+	public ResponseEntity<User> reject(@PathVariable("username") String username, @PathVariable("reason") String reason) {
+		log.debug("Starting of the method reject");
+
+		user = updateStatus(username, 'R', reason);
+		log.debug("Ending of the method reject");
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+
+	}
+
+	private User updateStatus(String username, char status, String reason) {
+		log.debug("Starting of the method updateStatus");
+
+		log.debug("status: " + status);
+		user = userDAOImpl.getUsername(username);
+
+		if (user == null) {
+			user = new User();
+			user.setErrorcode("404");
+			user.setErrormessage("Could not update the status to " + status);
+		} else {
+			
+			String role=(String)session.getAttribute("role");
+			if(role==null ||role.isEmpty()){
+				user.setErrorcode("404");
+				user.setErrormessage("You are not logged in");
+				return user;
+			}
+			if(!role.equalsIgnoreCase("admin"))
+			{
+				user.setErrorcode("404");
+				user.setErrormessage("You are not admin.You cannot do this operation");
+				log.debug("You are not admin.You cannot do this operation");
+				return user;
+			}
+
+			user.setStatus(status);
+			user.setReason(reason);
+			
+			userDAOImpl.Update(user);
+			
+			user.setErrorcode("200");
+			user.setErrormessage("Updated the status successfully");
+		}
+		log.debug("Ending of the method updateStatus");
+		return user;
+
+	}
+	@RequestMapping(value = "/friendRequest/", method = RequestMethod.POST)
+	public ResponseEntity<User> friendRequest(@RequestBody String friend_name,HttpSession session) {
+		System.out.println("calling method Friend request");
+		String currentusername = (String) session.getAttribute("username");
+		if(currentusername==null)
+		{
+			
+				System.out.println("User does not exist wiht id" + currentusername);
+			
+			user.setErrorcode("404");
+			user.setErrormessage("User does not exist");
+			return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
+		}
+		else
+		{
+			
+			if(isUserExist(friend_name)==false)
+			{
+				user.setErrorcode("404");
+				user.setErrormessage("User does not exist with the id:"+ friend_name);
+				return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
+				
+			}
+			/*if(friendDAOImpl.getFriendRequest(currentusername, friendname)!=null){
+				user.setErrorcode("404");
+				user.setErrormessage("You have already send the frined request to id:"+ friendname);
+				return new ResponseEntity<User>(user, HttpStatus.NOT_FOUND);
+			}*/
 		
+			
+		userDAOImpl.sendFriendRequest(currentusername, friend_name);
+		/*user.setErrorcode("200");
+		user.setErrormessage("User does not exist with the id:"+ friendname);*/
+		
+		log.debug("->->->-> User exist with username" + currentusername);
+		log.debug("friend_name is:"+friend_name);
+			
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	}
+	
+	
+	
+	private boolean isUserExist(String id){
+		if(userDAOImpl.getUsername(id)==null)
+			return false;
+		else 
+			return true;
+	}
+	
+	
 		}
 		

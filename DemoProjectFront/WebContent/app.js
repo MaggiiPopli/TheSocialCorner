@@ -162,7 +162,7 @@ controller : 'JobController'
  * Chat Mapping*/
 
 .when('/chat',{
-templateUrl : 'l_chat/chat.html',
+templateUrl : 'l_chat/Chat.html',
 
 })
 
@@ -192,10 +192,9 @@ app.controller('ImageDemoCtrl', ['$scope',function($scope) {
 	  
 	    
 	  ];
+	  
+
 }]);
-
-
-
 
 
 
@@ -212,7 +211,7 @@ app.run( function ($rootScope, $location,$cookieStore, $http) {
 		 //If the location.path is not equal to /search_job or '/view_blog' then this is restricted page.
 		 
 		 
-		 var restrictedPages=['','/','/search_job','/viewJobdetails','/view_applied_job','/viewBlog','/login','/logout','/uploadpropic','/myprofile', '/registration','/listBlog','/createBlog','/create_forum','/view_forum','/list_forum','/search_friend','/pending_request','/friend_details','/friend_list','/view_event','/home','/collapse1','/collapse2'];
+		 var restrictedPages=['','/','/search_job','/chat','/viewJobdetails','/view_applied_job','/viewBlog','/login','/logout','/uploadpropic','/myprofile', '/registration','/listBlog','/createBlog','/create_forum','/view_forum','/list_forum','/search_friend','/pending_request','/friend_details','/friend_list','/home','/collapse1','/collapse2'];
 		 var userRestrictedPages=['/manage_users','/post_job','/create_event','/manage_applied_jobs'];
 		 var currentPage=$location.path();
 		var isRestrictedPage=$.inArray(currentPage,restrictedPages)==1;
