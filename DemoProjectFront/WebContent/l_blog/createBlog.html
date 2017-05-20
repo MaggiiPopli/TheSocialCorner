@@ -1,18 +1,20 @@
 
-<div class="container" ng-app="myApp" ng-controller="BlogController as bctrl" align="center">
+<div class="container" ng-app="myApp" ng-controller="BlogController as bctrl" align="center" style="color:white;font: bold; background:url(lib/image/blog_back.jpg) repeat;">
 
 <form ng-submit="bctrl.submit()">
 
-<div class="form-group">
+<h2 style="color:maroon; font:italic; font:bold; font-family:Comic Sans MS; font-size:50px;">Create Blog</h2><br><br><br>
+
+<div class="form-group" style="font-size:30px; color:navy;">
 <input type="text" class="form control" id="blogTitle" ng-model="bctrl.blog.blogTitle" name="blogTitle" placeholder="Enter the Blog Title"/><br><br>
-</div>
+</div><br>
 
-<div class="form-group">
+<div class="form-group" style="font-size:30px; color:navy;">
 <input type="text" class="form control" id="description" ng-model="bctrl.blog.description" name="description" placeholder="Enter Blog Description"/><br><br>
-</div>
+</div><br><br>
 
 <div class="form-group">
-<input type="submit" class="btn btn-success green" value="Create Blog"/> 
+<input type="submit" class="btn btn-success green" value="Create Blog" style="font-size:20px;"/> 
 </div>
 </form>
 
