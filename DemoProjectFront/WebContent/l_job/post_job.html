@@ -1,4 +1,4 @@
-<div class="container" ng-app="myApp" ng-controller="JobController as ctrl" style="position: relative;font-size: 20px;width:100%;">
+<div class="container" ng-app="myApp" ng-controller="JobController as ctrl" style="position: relative;font-size: 20px;width:100%; background:url(lib/image/post_job.jpg) repeat;" >
 
 <div ng-show="!loggedIn">
 <div class="alert alert-danger fade in" >
@@ -15,26 +15,26 @@
 
 
             <form class="form-horizontal" role="form" ng-submit="ctrl.submit()">
-                <h2 style="font:bold;font-size:30px; text-align: center;">POST JOB</h2>
-                
+                <h2 style="color:maroon; font:italic; font:bold; font-family:Maiandra GD; font-size:50px; text-align: center;">POST JOB</h2>
+                <br><br>
                 <div class="form-group">
-                    <label for="Jobtitle" class="col-sm-3 control-label"style="text-align: left;">JobTitle</label>
+                    <label for="Jobtitle" class="col-sm-3 control-label"style="text-align: left;">JOB TITLE</label>
                     <div class="col-sm-9">
                         <input type="text" id="job_title" placeholder="Job Title" class="form-control" required="required" ng-model="ctrl.job.job_title">
                     </div>
-                </div>
+                </div><br>
                 <div class="form-group">
-                    <label for="Qualification" class="col-sm-3 control-label"style="text-align: left;">Qualification</label>
+                    <label for="Qualification" class="col-sm-3 control-label"style="text-align: left;">QUALIFICATION</label>
                     <div class="col-sm-9">
                         <input type="text" id="qualification" placeholder="Qualification" class="form-control" required="required" ng-model="ctrl.job.qualification">
                     </div>
-                </div>
+                </div><br>
                  <div class="form-group">
-                    <label for="description" class="col-sm-3 control-label"style="text-align: left;">Job Description</label>
+                    <label for="description" class="col-sm-3 control-label"style="text-align: left;">JOB DESCRIPTION</label>
                     <div class="col-sm-9">
                         <textarea id="description" placeholder="Job Description" required="required" class="form-control" ng-model="ctrl.job.description"></textarea>
                     </div>
-                </div>
+                </div><br>
   
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
