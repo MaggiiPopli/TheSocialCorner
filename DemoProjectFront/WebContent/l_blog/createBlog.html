@@ -1,6 +1,21 @@
 
 <div class="container" ng-app="myApp" ng-controller="BlogController as bctrl" align="center" style="color:white;font: bold; background:url(lib/image/blog_back.jpg) repeat;">
 
+<div ng-show="!loggedIn">
+<div class="alert alert-danger fade in">
+      You are not logged in.. Please &nbsp; <a href="#/login">Login</a>
+        &nbsp; to Create a Forum
+         </div><br><br>
+         
+         <div class="alert alert-danger fade in">
+            Or you can Register yourself by clicking <a href="#/registration">here</a>
+            </div>
+
+</div>
+
+<div ng-show="loggedIn">
+
+
 <form ng-submit="bctrl.submit()">
 
 <h2 style="color:maroon; font:italic; font:bold; font-family:Comic Sans MS; font-size:50px;">Create Blog</h2><br><br><br>
@@ -20,4 +35,4 @@
 
 </div>
 
- 
+ </div>
