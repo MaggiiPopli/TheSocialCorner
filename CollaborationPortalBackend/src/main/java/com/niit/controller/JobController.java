@@ -165,7 +165,7 @@ public class JobController {
 		{
 			if(jobDAOImpl.getAppliedJob(username, jobid)==null)
 			{
-				//jobapplied.setJobid(jobid);
+				jobapplied.setJobid(jobid);
 				jobapplied.setUsername(username);
 				jobapplied.setStatus('N');  //N=>Newly Applied,C=>Call for interview ,S=>selected
 				jobapplied.setDate_applied(new Date(System.currentTimeMillis()));

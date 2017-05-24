@@ -17,7 +17,7 @@ public class JobApplied extends Error {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String username;
-	private String jobid;
+	private int jobid;
 	private char status;
 	private String remarks;
 	private Date date_applied;
@@ -34,10 +34,10 @@ public class JobApplied extends Error {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getJobid() {
+	public int getJobid() {
 		return jobid;
 	}
-	public void setJobid(String jobid) {
+	public void setJobid(int jobid) {
 		this.jobid = jobid;
 	}
 	public char getStatus() {

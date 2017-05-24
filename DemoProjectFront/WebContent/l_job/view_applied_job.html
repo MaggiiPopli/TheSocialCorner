@@ -13,7 +13,7 @@
 
 <div ng-show="loggedIn"  >
 	<div class="row">
-		<h2>Search Job</h2>
+		<h2 style="font:italic; font:bold; font-family:Maiandra GD;">Search Job</h2>
            <div id="custom-search-input">
                             <div class="input-group col-md-6">
                                 <input type="text" class="  search-query form-control" placeholder="Search" ng-model="searchString" />
@@ -26,10 +26,13 @@
                         </div>
 	</div>
 	
+	<h1 style="color:maroon; font:italic; font:bold; font-family:Maiandra GD; font-size:50px; text-align: center;">Applied Jobs</h1>
+	
 	<div ng-repeat="job in getAppliedJob | filter:searchString">
 	<section class="featured-jobs">
     <div class="container">
-		<div class="center-block"><h1>Applied Jobs</h1></div>
+    
+		<div class="center-block"></div>
 		<div class="row">
 
 				
