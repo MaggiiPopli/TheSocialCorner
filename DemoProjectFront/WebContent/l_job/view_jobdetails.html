@@ -1,19 +1,19 @@
-<div ng-app="myApp" ng-controller="JobController as ctrl">
-<div class="post" >
+<div ng-app="myApp" ng-controller="JobController as ctrl" style="text-align:center; background:url(lib/image/post_job.jpg) repeat;">
+<div class="post">
           <div>
-            
-            <h2 style="margin-top: 20px;padding-top: 20px;font-size: 30px;font:bold;color: blue;">{{selectedJob.job_title}}</h2>
-           
-            <cite style="font:bold; color:black;">Posted On {{selectedJob.date_time|date}}</cite><br><br><br>
-            <div class="post-body" style="color:black;">
+            <h3 style="color:maroon; font:italic; font:bold; font-family:Maiandra GD; font-size:50px; text-align: center;">Job Details</h3>
+            <h2 style="margin-top: 20px;padding-top: 20px;font-size: 30px;font:bold; text-align: center; color: blue;">{{selectedJob.job_title}}</h2>
+           <br><br>
+            <cite style="font:bold; color:black; text-align:center;">Posted On {{selectedJob.date_time|date}}</cite><br><br><br>
+            <div class="post-body" style="color:black; text-align:center;">
              <p>
                {{selectedJob.description}}
-             </p> 
+             </p> <br><br>
              
             </div>
-            <div class="feature-btns">
+            <div class="feature-btns" style="text-align:center;">
 								
-								 <a href="#" class="btn btn-warning" role="button" ng-click="ctrl.applyForJob(selectedJob.jobid)"> Apply For Job</a><!-- <span class="glyphicon glyphicon-star-empty"></span> -->
+								 <a href="#" class="btn btn-warning" role="button" ng-click="ctrl.applyForJob(selectedJob.jobid)"> Apply For Job</a>
 								 </div>
             
            

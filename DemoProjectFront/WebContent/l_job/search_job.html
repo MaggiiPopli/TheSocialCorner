@@ -1,7 +1,7 @@
-<div class="container" ng-app="myApp" ng-controller="JobController as ctrl">
+<div class="container" ng-app="myApp" ng-controller="JobController as ctrl" style="background:url(lib/image/post_job.jpg) repeat;">
 	<div class="row">
 		
-	<div class="center-block" style="font-size: 20px;font:bold;"><h1>Searched Jobs</h1></div>
+	<div class="center-block" style="align:centre;"><h2 style="color:maroon; align:centre; font:italic; font:bold; font-family:Maiandra GD; font-size:50px; text-align: center;">Jobs Available</h2></div>
 	
 	
 	<div ng-repeat="job in AllJobs | filter:searchString"><!-- ng-repeat -->
@@ -16,7 +16,7 @@
 						<div class="thumbnail" style="font-size: 5px;">
 								<p style="font-size: 15px;color:black;font:bold">JobId:  {{job.jobid}}</p> 
 								<a href="#/viewJobdetails" class="btn btn-primary" role="button" ng-click="ctrl.getJobDetails(job.jobid)"><span class="glyphicon glyphicon-file"></span> View Details</a>
-								<a href="" class="feature-link"><h3>{{job.job_title}}</h3></a>
+								<a href="" class="feature-link"><h3 style="font:italic; font:bold; font-family:Maiandra GD; font-size:20px;">{{job.job_title}}</h3></a>
 								<p style="font-size: 15px;color:black;">Qualification:{{job.qualification}}</p>
 								<span class="meta" style="font-size: 15px;color:black;">Posted on: {{job.date_time|date}}</span>
 								<div class="feature-btns">
