@@ -3,7 +3,7 @@
 <br><div class="post" >
           <div>
             
-            <h3 style="font:bold;color: Chartreuse ;">Blog Name: {{selectedBlog.blogTitle}}</h3><br><br>
+            <h3 style="font:bold; font-size:20px; color: Chartreuse ;">Blog Name: {{selectedBlog.blogTitle}}</h3><br><br>
            
             <cite style="font:bold; color:black;">Posted By : {{selectedBlog.username}} on {{selectedBlog.date_of_creation | date}}</cite><br><br><br>
             <div class="post-body" style="color:black;">
@@ -32,7 +32,9 @@
                 <h3 style="color: black;font: bold;font-size: 20px;font-style: normal; font-family:Maiandra GD; text-transform: uppercase;">Add a Comment</h3>
                   <br><textarea ng-model="commentctrl.blogcomment.comments" cols="30" rows="10" required></textarea>
                <br><br>
-                    <input type="submit" class="btn btn-primary btn-block" style="width: 400px;" value="Submit" />
+          <div class="container" align="center">
+         		<input type="submit" class="btn btn-primary btn-block" style="width: 400px; align:center;" value="Submit" />
+               </div>
                 </form>
             </div>
         </div>

@@ -1,10 +1,13 @@
-<div class="container" ng-app="myApp" ng-controller="ForumController as ctrl"style="position: relative;">
+<div class="container" ng-app="myApp" ng-controller="ForumController as ctrl" style=" align: center; text-align:center; background:url(lib/image/list_blog.jpg) repeat;">
+<h2 style="color:maroon; align:centre; font:italic; font:bold; font-family:Maiandra GD; font-size:50px; text-align:center;">Details</h2>
 
+<br>
 <div class="post" >
           <div>
             
-            <h2 style="margin-top: 20px;padding-top: 20px;font-size: 25px;font:bold;color: blue;">{{selectedforum.forum_topic}}</h2>
+            <h2  style="font:bold; font-size:20px; color: Chartreuse ;">Forum Name: {{selectedforum.forum_topic}}</h2>
            
+           <br>
             <cite style="font:bold; color:black;">Posted By {{selectedforum.username}} on {{selectedforum.date_created | date}}</cite><br><br><br>
             <div class="post-body" style="color:black;">
              <p>
@@ -14,27 +17,26 @@
             
             <div class="comments" ng-controller="ForumCommentController as commentctrl">
              
-            <!--   <button class="fa fa-heart" ng-click="post.likes = post.likes+1"> {{post.likes}}</button><br><br><br> -->
-          <br>    <h3 style="color: black;text-decoration:underline;font: bold;font-size: 20px;font-style: normal;text-transform: uppercase;float:center;">Comments</h3><br><br>
+            
+          <br>    <h3 style="color: yellow;font-family:Maiandra GD; text-decoration:underline;font: bold;font-size: 20px;font-style: normal;text-transform: uppercase;float:center;">Comments</h3><br><br>
           
               <ul style="color:black;font: bold;font-size: 15px;font-style: normal;">
                <li ng-repeat="value in fetchComments">
-               <div style="border: inset;padding: 20px;margin: 10px;">
-                <div style="padding:10px;">
+               
                  <p style="color:orange ;font-size: 18px;"><b>{{value.username}}</b></p>
                  <p style="color:black ;font-size: 13px;"><b> {{value.comment_date |date}}</b></p>
-                 </div>
+                 
                  <div>
                  <p style="color: black;font-size: 15px;"> {{value.forum_comment}}<p>
-               </div>
-               </div>
+               </div><br><br>
+            
                </li>
-              </ul><br><br>
+              </ul>
              </div>
               <form name="commentForm" ng-submit="commentctrl.submit(selectedforum.forum_id)" novalidate>
               
                 
-                <h3 style="color: black;font: bold;font-size: 20px;font-style: normal;text-transform: uppercase;">Add Comment</h3>
+                <h3 style="color: black;font: bold;font-size: 20px;font-style: normal; font-family:Maiandra GD; text-transform: uppercase;">Add a Comment</h3>
                   <br><textarea ng-model="commentctrl.forumcomment.forum_comment" cols="30" rows="10" required></textarea>
                
                     <input type="submit" value="Submit" />
