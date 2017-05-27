@@ -8,10 +8,10 @@
             <h2  style="font:bold; font-size:20px; color: Chartreuse ;">Forum Name: {{selectedforum.forum_topic}}</h2>
            
            <br>
-            <cite style="font:bold; color:black;">Posted By {{selectedforum.username}} on {{selectedforum.date_created | date}}</cite><br><br><br>
+            <cite style="font:bold; color:black;">Posted By: {{selectedforum.username}} on {{selectedforum.date_created | date}}</cite><br><br>
             <div class="post-body" style="color:black;">
              <p>
-               {{selectedforum.forum_question}}
+              About Forum: {{selectedforum.forum_question}}
              </p> 
             </div>
             
@@ -38,8 +38,11 @@
                 
                 <h3 style="color: black;font: bold;font-size: 20px;font-style: normal; font-family:Maiandra GD; text-transform: uppercase;">Add a Comment</h3>
                   <br><textarea ng-model="commentctrl.forumcomment.forum_comment" cols="30" rows="10" required></textarea>
-               
-                    <input type="submit" value="Submit" />
+               <br><br>
+				<div class="container" align="center">
+         		<input type="submit" class="btn btn-primary btn-block" style="width: 400px; align:center;" value="Submit" />
+               </div>
+
                 </form>
             </div>
         </div>
