@@ -1,29 +1,22 @@
-<!-- <div class="container">
-					
-					<nav class="navbar navbar-inverse " style="color:black;font: bold;">
-  <div class="container-fluid" >
-  
-    <ul class="nav nav-tabs nav-stacked" >
-   
-    
-     
-   				<li><a href="threecolumn.html">Manage Users</a></li>
-   				<li><a href="threecolumn.html">Manage Applied Jobs</a></li>
-							
-							
-    </ul>
-  
- <div >
- </div>
- </div>
- </nav>
- </div> -->
+
  
- 
-  <div class='container' ng-app="myApp" ng-controller="JobController as ctrl">
+  <div class='container' ng-app="myApp" ng-controller="JobController as ctrl" style="background:url(lib/image/admin_main.jpg) repeat;">
+  
+  <div ng-show="!loggedIn">
+<div class="alert alert-danger fade in">
+      You are not logged in.. Please login &nbsp; <a href="#/login"> here</a>
+        &nbsp; to Continue!
+         </div>
+         
+        
+
+</div>
+
+<div ng-show="loggedIn">
   
  <div ng-show="role!='Admin'">
-You are not the Admin!
+<h4 style="color:Orange; font:italic; font:bold; font-family:Maiandra GD; font-size:20px; text-align:justify;">Only Admin has the access to this page!</h4>
+<br><br>
 </div>
    
    <div ng-show="role=='Admin'">
@@ -31,13 +24,13 @@ You are not the Admin!
     <div id='content' class='row-fluid'>
     <div class='span2 sidebar'>
         <ul class="nav nav-tabs nav-stacked">
-          <li><a href="#/manage_users">Manage Users</a></li>
-          <li><a href="#/manage_blogs">Manage Blogs</a></li>
-          <li><a href="#/manage_applied_jobs" ng-click="ctrl.getAllAppliedJobs()">Manage Applied Jobs</a></li>
+          <li><a style="color:orange; font:italic; font:bold; font-family:Maiandra GD;" href="#/manage_users">Manage Users</a></li>
+          <li><a style="color:orange; font:italic; font:bold; font-family:Maiandra GD;" href="#/manage_blogs">Manage Blogs</a></li>
+          <li><a style="color:orange; font:italic; font:bold; font-family:Maiandra GD;" href="#/manage_applied_jobs" ng-click="ctrl.getAllAppliedJobs()">Manage Applied Jobs</a></li>
          
         </ul>
       </div>
     </div>
-     
+     </div>
     </div>
   </div>

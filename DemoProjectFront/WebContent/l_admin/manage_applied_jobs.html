@@ -1,4 +1,4 @@
-<div class="container" style="position: relative;font-size: 20px;width:100%;" >
+<div class="container" style="position: relative;font-size: 20px;width:100%; background:url(lib/image/admin_manage.jpg) repeat;">
 <div ng-show="!loggedIn">
 <div class="alert alert-danger fade in">
       You are not logged in.. Please login &nbsp; <a href="#/login"> here</a>
@@ -10,6 +10,11 @@
 </div>
 
 <div ng-show="loggedIn">
+
+<h2 style="color:maroon; font:italic; font:bold; font-family:Maiandra GD; font-size:50px; text-align: center;">Job Details</h2>
+	<br>
+
+
 <div ng-show="role=='Admin'">
 	<table id="search" class="table table-hover table-condensed">
     				<thead>
