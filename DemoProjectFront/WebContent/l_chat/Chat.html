@@ -21,9 +21,9 @@
    <div class="info">
      <span class="count" ng-bind="max - message.length" ng-class="{danger: message.length > max}" style="color:orange;">140</span>
      <br><br>
-       <button ng-disabled="message.length > max || message.length === 0">send</button>
+       <button ng-disabled=" message.length == 0">send</button>
        </div>
-      </form>
+      </form><!-- message.length > max || -->
      <hr />
      
        <div class="container" style="color:yellow;">

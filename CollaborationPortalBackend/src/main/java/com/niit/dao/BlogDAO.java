@@ -33,4 +33,6 @@ public interface BlogDAO {
 	
 	public List<BlogComment> getBlogCommentList();
 	
+	public List<BlogComment> getBlogCommentListNew(int blog_id);
+	
 }

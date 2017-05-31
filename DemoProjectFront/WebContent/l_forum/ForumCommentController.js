@@ -50,6 +50,24 @@ console.log('INSIDE forum COMMENT CONTROLLER')
 	};
 	
 	console.log('fetchallforumscomment')
+	self.fetchAllForumsCommentNew=function(forum_id){
+		console.log(' Inside FetchAllforums Comment method in forumComment Controller ')
+		ForumService.fetchAllForumsCommentNew(forum_id)
+		.then(function(d){
+			self.forumcomments=d;
+			
+			console.log('value in forumcomments',self.forumcomments)
+			
+		},
+		
+		function(errResponse){
+			console.error('Error while fetching the data');
+		}
+		
+		);
+	};
+	
+	console.log('fetchallforumscomment')
 	self.fetchAllForumsComment=function(){
 		console.log(' Inside FetchAllforums Comment method in forumComment Controller ')
 		ForumService.fetchAllForumsComment()
@@ -111,15 +129,21 @@ console.log('INSIDE forum COMMENT CONTROLLER')
        		console.log('forums Comment value',self.forumcomments)
        		
        		//calling the method when it will be exceute
-	self.fetchAllForumsComment();
+	
+       		
+       		//self.fetchAllForumsCommentNew(selectedforum.forum_id);
+       		
+      	//self.fetchAllForumsComment();
+       		//self.getSelectedForumComment();
        		
        		self.getSelectedForumComment = getForumComment
-       		function getForumComment(id){ //?
-          		console.log("--.getting forum comment:"+id)//?
+       		function getForumComment(id){
+          		console.log("--.getting forum comment:"+id)
           		ForumService.getForumComment(id)
           		.then(function(d){
+          			//self.forum=d;
           			console.log('getSelectedforum Comment in forumCommentController',self.forumcomment)
-          			$location.path('/view_forum');
+          			$location.path('/viewforum');
           			
           		},
           		function(errResponse){
@@ -127,5 +151,7 @@ console.log('INSIDE forum COMMENT CONTROLLER')
           		}
           	);
           		};
+          		
+          		
 	
 }]);

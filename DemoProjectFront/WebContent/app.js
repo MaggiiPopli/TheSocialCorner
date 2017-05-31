@@ -17,7 +17,13 @@ $routeProvider
 	templateUrl : 'l_common/contactus.html',
 	})
 
-
+.when('/x',{
+	templateUrl : 'l_forum/x.html',
+	})
+	
+	.when('/y',{
+	templateUrl : 'l_blog/y.html',
+	})
 .when('/home',{
 templateUrl : 'l_common/body.html',
 controller : 'UserController'
@@ -40,6 +46,14 @@ templateUrl : 'l_home/home.html',
 .when('/manage_users',{
 templateUrl : 'l_admin/manage_users.html',
 controller : 'UserController'
+})
+.when('/manage_blogs',{
+templateUrl : 'l_admin/manage_blog.html',
+controller : 'BlogController'
+})
+.when('/admin_menu',{
+templateUrl : 'l_admin/admin_menu.html',
+
 })
 
 .when('/manage_applied_jobs',{
@@ -72,10 +86,6 @@ templateUrl : 'l_user/myprofile.html',
 controller : 'UserController'
 })
 
-.when('/uploadpropic',{
-templateUrl : 'l_user/uploadpropic.html'
-
-})
 
 /*
  * Blog Mapping
@@ -211,8 +221,8 @@ app.run( function ($rootScope, $location,$cookieStore, $http) {
 		 //If the location.path is not equal to /search_job or '/view_blog' then this is restricted page.
 		 
 		 
-		 var restrictedPages=['','/','/search_job','/chat','/viewJobdetails','/view_applied_job','/viewBlog','/login','/logout','/uploadpropic','/myprofile', '/registration','/listBlog','/createBlog','/create_forum','/view_forum','/list_forum','/search_friend','/pending_request','/friend_details','/friend_list','/home','/collapse1','/collapse2'];
-		 var userRestrictedPages=['/manage_users','/post_job','/create_event','/manage_applied_jobs'];
+		 var restrictedPages=['','/','/x','/y','/search_job','/admin_menu','/chat','/viewJobdetails','/view_applied_job','/viewBlog','/login','/logout','/myprofile', '/registration','/listBlog','/createBlog','/create_forum','/view_forum','/list_forum','/search_friend','/pending_request','/friend_details','/friend_list','/home','/collapse1','/collapse2'];
+		 var userRestrictedPages=['/manage_users','/manage_blogs','/manage_applied_jobs','/post_job'];
 		 var currentPage=$location.path();
 		var isRestrictedPage=$.inArray(currentPage,restrictedPages)==1;
 		var isUserRestrictedPage=$.inArray(currentPage,userRestrictedPages)==1;
@@ -225,7 +235,6 @@ app.run( function ($rootScope, $location,$cookieStore, $http) {
 		 
 		 
 		 
-	      //  var restrictedPage = $.inArray($location.path(), ['','/','/search_job','/manage_users','/view_jobdetails','/post_job','/view_applied_job','/view_blog','/login', '/registration','/list_blog','/create_blog','/create_forum','/view_forum','/list_forum','/search_friend','/pending_request','/friend_details','/friend_list']) === -1;
 		 console.log("Navigating to page :" + $location.path())
 	        console.log("restrictedPage:" +restrictedPages)
 	        console.log("currentUser:" +$rootScope.currentUser.username)
@@ -279,10 +288,10 @@ app.run( function ($rootScope, $location,$cookieStore, $http) {
 	 
 	 
 	 // keep user logged in after page refresh
-    $rootScope.currentUser = $cookieStore.get('currentUser') || {};
-    if ($rootScope.currentUser) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.currentUser; 
-    }
+ $rootScope.currentUser = $cookieStore.get('currentUser') || {};
+ if ($rootScope.currentUser) {
+     $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.currentUser; 
+ }
 
 });
 

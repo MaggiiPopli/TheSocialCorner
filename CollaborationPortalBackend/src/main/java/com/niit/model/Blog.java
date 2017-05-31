@@ -20,7 +20,22 @@ public class Blog extends Error{
 	private String description;
 	private Date date_of_creation;
 	private String username;
+	private char status;
+	private String reason;
 	
+	
+	public char getStatus() {
+		return status;
+	}
+	public void setStatus(char status) {
+		this.status = status;
+	}
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	public int getBlog_id() {
 		return blog_id;
 	}

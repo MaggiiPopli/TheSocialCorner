@@ -107,6 +107,25 @@ app.factory('ForumService',['$http', '$q', '$rootScope', function($http, $q, $ro
 			 );
 		 },
 		 
+		 
+		 
+		 fetchAllForumsCommentNew:function(forum_id){
+			 console.log('fetchAllforums comment Method in forumServices')
+			 return $http.get(REST_SERVICE_URI+'/getallforumcommentsnew/'+forum_id)
+			 .then(
+			function(response){
+				console.log('success in forumService',response.data)
+				$rootScope.fetchComments1=response.data;
+				return response.data;
+			},
+			function(errResponse){
+				console.error('Error while fetching the forumsComment');
+				return $q.reject(errResponse);
+			}
+			 );
+			 
+		 },
+		 
 		 fetchAllForumsComment:function(){
 			 console.log('fetchAllforums comment Method in forumServices')
 			 return $http.get(REST_SERVICE_URI+'/getallforumcomments/')

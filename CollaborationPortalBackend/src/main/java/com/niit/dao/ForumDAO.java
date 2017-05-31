@@ -19,6 +19,7 @@ public interface ForumDAO {
 	public void deleteForumComment(int forum_id);
 	public ForumComment getForumCommentByID(int forum_id);
 	public List<ForumComment> getAllForumComment();
+	public List<ForumComment> getAllForumCommentNew(int forum_id);
 	
 
 }

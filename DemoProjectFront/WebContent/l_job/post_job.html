@@ -1,3 +1,4 @@
+
 <div class="container" ng-app="myApp" ng-controller="JobController as ctrl" style="position: relative;font-size: 20px;width:100%; background:url(lib/image/post_job.jpg) repeat;" >
 
 <div ng-show="!loggedIn">
@@ -12,6 +13,11 @@
 
 </div>
 <div ng-show="loggedIn">
+
+<div ng-show="role!='Admin'">
+You are not the Admin!
+</div>
+<div ng-show="role=='Admin'">
 
 
             <form class="form-horizontal" role="form" ng-submit="ctrl.submit()">
@@ -43,5 +49,5 @@
                 </div>
             </form> <!-- /form -->
             </div>
-            
+            </div>
         </div> <!-- ./container -->

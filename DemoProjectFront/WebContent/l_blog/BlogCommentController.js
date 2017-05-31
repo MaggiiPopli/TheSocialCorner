@@ -67,6 +67,24 @@ console.log('INSIDE BLOG COMMENT CONTROLLER')
 		);
 	};
 	
+	console.log('fetchallblogscommentnew')
+	self.fetchAllBlogsCommentNew=function(blog_id){
+		console.log(' Inside FetchAllBlogs Comment new method in BlogComment Controller ')
+		BlogService.fetchAllBlogsCommentNew(blog_id)
+		.then(function(d){
+			self.blogcomments=d;
+			
+			console.log('value in blogcomments',self.blogcomments)
+			
+		},
+		
+		function(errResponse){
+			console.error('Error while fetching the data');
+		}
+		
+		);
+	};
+	
 	 self.reset=function(){
       	  console.log('resetting the form',self.blogcomment);
       	  self.blogcomment={
@@ -111,7 +129,7 @@ console.log('INSIDE BLOG COMMENT CONTROLLER')
        		console.log('blogs Comment value',self.blogcomments)
        		
        		//calling the method when it will be exceute
-	self.fetchAllBlogsComment();
+	//self.fetchAllBlogsComment();
        		
        		self.getSelectedBlogComment = getBlogComment
        		function getBlogComment(id){

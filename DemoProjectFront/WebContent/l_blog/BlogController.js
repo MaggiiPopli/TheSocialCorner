@@ -7,8 +7,10 @@ app.controller('BlogController', ['$scope','$location', 'BlogService', function(
 			description:'',
 			date_of_creation:'',
 			username:'',
+			status:'',
+			reason:'',
 			errorcode:'',
-			errormessagae:''
+			errormessage:''
 			
 			};
 	self.blogs=[];
@@ -81,6 +83,43 @@ self.updateBlog=function(blog_id){
 						console.error("Error while deleting Blog");
 					});
 		}; 
+		
+		 self.accept = function(blog_id) {
+				console.log("accept...")
+				BlogService.accept(blog_id)
+						.then(
+								function(d) {
+									self.blog = d;
+									self.fetchAllBlogs
+									$location.path("/manage_blogs")
+									console.log('Error Message is',self.blog.errormessage)
+									alert(self.blog.errormessage)
+									
+									
+								},
+								
+								function(errResponse) {
+									console
+											.error('Error while updating Blog.');
+								});
+			};
+			
+			self.reject = function(blog_id) {
+				console.log("reject...")
+				var reason = prompt("Please enter the reason");
+				BlogService
+						.reject(blog_id,reason)
+						.then(
+								function(d) {
+									self.blog = d;
+									self.fetchAllBlogs
+									$location.path("/manage_blogs")
+									alert(self.blog.errormessage)
+									
+								},
+								null );
+			};
+		       		
 		console.log('blogs value',self.blogs)
 		
 		//calling the method when it will be exceute

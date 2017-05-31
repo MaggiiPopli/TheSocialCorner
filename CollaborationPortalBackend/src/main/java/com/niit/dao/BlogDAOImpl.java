@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.niit.model.Blog;
 import com.niit.model.BlogComment;
+import com.niit.model.User;
 
 @Repository
 public class BlogDAOImpl implements BlogDAO{
@@ -24,12 +25,27 @@ public class BlogDAOImpl implements BlogDAO{
 		this.sessionFactory=sessionFactory;
 	}
 
+	public void Update(Blog blog) {
+		try {
+			Session session=sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			session.update(blog);
+			tx.commit();
+			session.close();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+	}
+	
 	
 	public boolean insertBlog(Blog blog) {
 		// TODO Auto-generated method stub
 		try{
 		Session sess=sessionFactory.openSession();
 		Transaction tx=sess.beginTransaction();
+		blog.setStatus('N');
 		sess.save(blog);
 		tx.commit();
 		sess.close();
@@ -206,7 +222,28 @@ public class BlogDAOImpl implements BlogDAO{
 		// TODO Auto-generated method stub
 		Session sess=sessionFactory.openSession();
 		Transaction tx=sess.beginTransaction();
-		Query query=sess.createQuery("from Blog");
+		Query query=sess.createQuery("from Blog"); //where status='A'
+		List<Blog> b=query.list();
+		tx.commit();
+		sess.close();
+		return b;
+	}
+
+	public List<BlogComment> getBlogCommentListNew(int blog_id) {
+		Session sess=sessionFactory.openSession();
+		Transaction tx=sess.beginTransaction();
+		Query q=sess.createQuery("from BlogComment where blog_id=:blog_id");
+		q.setParameter("blog_id", blog_id);
+		List<BlogComment> l=q.list();
+		tx.commit();
+		sess.close();
+		return l;
+	}
+
+	public List<Blog> getAllBlogs1() {
+		Session sess=sessionFactory.openSession();
+		Transaction tx=sess.beginTransaction();
+		Query query=sess.createQuery("from Blog where status='A'"); //where status='A'
 		List<Blog> b=query.list();
 		tx.commit();
 		sess.close();

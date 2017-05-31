@@ -161,6 +161,7 @@ public class ForumController {
 	@RequestMapping(value="/getforumcomment/{forum_id}",method=RequestMethod.GET)
 	public ResponseEntity<ForumComment> getForumComment(@PathVariable int forum_id)
 	{
+		System.out.println("Inside getforumcomment in ForumController.java"+forum_id);
 		forumcomment=forumDAOImpl.getForumCommentByID(forum_id);
 		forumcomment.setErrorcode("200");
 		forumcomment.setErrormessage("Retrieved the blogcomment");
@@ -172,6 +173,17 @@ public class ForumController {
 	{
 		 
 		List<ForumComment>forumlist= forumDAOImpl.getAllForumComment();
+		forumcomment.setErrorcode("200");
+		forumcomment.setErrormessage("Fetched All the forumscomment");
+		forumlist.add(forumcomment);
+		return new ResponseEntity<List<ForumComment>>(forumlist,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/getallforumcommentsnew/{forum_id}",method=RequestMethod.GET)
+	public ResponseEntity<List<ForumComment>> getAllForumCommentsnew(@PathVariable int forum_id)
+	{
+		 
+		List<ForumComment> forumlist= forumDAOImpl.getAllForumCommentNew(forum_id);
 		forumcomment.setErrorcode("200");
 		forumcomment.setErrormessage("Fetched All the forumscomment");
 		forumlist.add(forumcomment);

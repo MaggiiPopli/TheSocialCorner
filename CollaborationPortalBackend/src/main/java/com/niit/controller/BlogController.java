@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.niit.dao.BlogDAOImpl;
 import com.niit.model.Blog;
 import com.niit.model.BlogComment;
+import com.niit.model.User;
 import com.sun.org.apache.regexp.internal.recompile;
 
 @RestController
@@ -33,6 +34,9 @@ public class BlogController {
 	
 	@Autowired
 	Blog blog;
+	
+	@Autowired
+	HttpSession session;
 	
 	@Autowired
 	BlogComment blogComment;
@@ -118,7 +122,7 @@ public class BlogController {
 	@RequestMapping(value="/getAllblogs/",method=RequestMethod.GET)
 	public ResponseEntity<List<Blog>> getAllBlogs()
 	{
-		List<Blog> blogList=blogDAOImpl.getAllBlogs();
+		List<Blog> blogList=blogDAOImpl.getAllBlogs1();
 		blog.setErrorcode("200");
 		blog.setErrormessage("All Blogs Fetched!!");
 		return new ResponseEntity<List<Blog>>(blogList, HttpStatus.OK);
@@ -199,4 +203,73 @@ public class BlogController {
 		blogComment.setErrormessage("ALL Blog Comments Fetched!!");
 		return new ResponseEntity<List<BlogComment>>(bloglist,HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/getblogcommentsnew/{blog_id}",method=RequestMethod.GET)
+	public ResponseEntity<List<BlogComment>> getallBlogComments(@PathVariable("blog_id") int blog_id)
+	{
+		List<BlogComment> bloglist=blogDAOImpl.getBlogCommentListNew(blog_id);
+		blogComment.setErrorcode("200");
+		blogComment.setErrormessage("ALL Blog Comments Fetched!!");
+		return new ResponseEntity<List<BlogComment>>(bloglist,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/acceptb/{blog_id}", method = RequestMethod.GET)
+	public ResponseEntity<Blog> accept(@PathVariable("blog_id") int blog_id) {
+		log.debug("Starting of the method accept");
+
+		blog = updateStatus(blog_id, 'A', "");
+		log.debug("Ending of the method accept");
+		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/rejectb/{blog_id}/{reason}", method = RequestMethod.GET)
+	public ResponseEntity<Blog> reject(@PathVariable("blog_id") int blog_id, @PathVariable("reason") String reason) {
+		log.debug("Starting of the method reject");
+
+		blog = updateStatus(blog_id, 'R', reason);
+		log.debug("Ending of the method reject");
+		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
+
+	}
+	
+	private Blog updateStatus(int blog_id, char status, String reason) {
+		log.debug("Starting of the method updateStatus");
+
+		log.debug("status: " + status);
+		blog = blogDAOImpl.getBlogbyId(blog_id);
+
+		if (blog == null) {
+			blog = new Blog();
+			blog.setErrorcode("404");
+			blog.setErrormessage("Could not update the status to " + status);
+		} else {
+			
+			String role=(String)session.getAttribute("role");
+			if(role==null ||role.isEmpty()){
+				blog.setErrorcode("404");
+				blog.setErrormessage("You are not logged in");
+				return blog;
+			}
+			if(!role.equalsIgnoreCase("admin"))
+			{
+				blog.setErrorcode("404");
+				blog.setErrormessage("You are not admin.You cannot do this operation");
+				log.debug("You are not admin.You cannot do this operation");
+				return blog;
+			}
+
+			blog.setStatus(status);
+			blog.setReason(reason);
+			
+			blogDAOImpl.Update(blog);
+			
+			blog.setErrorcode("200");
+			blog.setErrormessage("Updated the status successfully");
+		}
+		log.debug("Ending of the method updateStatus");
+		return blog;
+
+	}
+
 }

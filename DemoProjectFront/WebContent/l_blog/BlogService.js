@@ -131,6 +131,49 @@ app.factory('BlogService', ['$http', '$q','$rootScope', function($http, $q,$root
 	 );
 	 
  },
+ 
+ fetchAllBlogsCommentNew:function(blog_id){
+	 console.log('fetchAllBlogs comment Method in BlogServices')
+	 return $http.get(REST_SERVICE_URI+'/getblogcommentsnew/'+blog_id)
+	 .then(
+	function(response){
+		console.log('success in BlogService',response.data)
+		$rootScope.fetchComments1=response.data;
+		return response.data;
+	},
+	function(errResponse){
+		console.error('Error while fetching the BlogsCommentnew');
+		return $q.reject(errResponse);
+	}
+	 );
+	 
+ },
+ accept: function(blog_id) {
+  	console.log("calling approve ")
+          return $http.get(REST_SERVICE_URI+'/acceptb/'+blog_id)
+                  .then(
+                          function(response){
+                              return response.data;
+                          }, 
+                          function(errResponse){
+                              console.error('Error while accept blog');
+                             
+                          }
+                  );
+  },
+  reject: function(blog_id, reason) {
+  	console.log("calling reject ")
+          return $http.get(REST_SERVICE_URI+'/rejectb/'+blog_id+'/'+reason)
+                  .then(
+                          function(response){
+                              return response.data;
+                          }, 
+                          function(errResponse){
+                              console.error('Error while reject blog');
+                              return $q.reject(errResponse);
+                          }
+                  );
+  },
  getBlogComment:function(id){
 	 return $http.get(REST_SERVICE_URI+'/getblogcomment/'+id)
 	 .then(function(response){

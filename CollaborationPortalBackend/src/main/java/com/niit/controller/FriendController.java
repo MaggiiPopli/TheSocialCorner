@@ -42,7 +42,7 @@ public class FriendController {
 		String username=(String) session.getAttribute("username");
 		List<Friend> friendList=friendDAOImpl.getFriendList(username);
 		
-		System.out.println("pendinf users"+friendList);
+		System.out.println("pending users"+friendList);
 		
 		if(friendList.isEmpty() || friendList==null)
 		{

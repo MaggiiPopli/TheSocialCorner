@@ -162,6 +162,19 @@ public class ForumDAOImpl implements ForumDAO{
 		sess.close();
 		return f;
 	}
+
+	public List<ForumComment> getAllForumCommentNew(int forum_id) {
+		// TODO Auto-generated method stub
+		Session sess=sessionFactory.openSession();
+		Transaction tx = sess.beginTransaction();
+		Query query = sess.createQuery("from ForumComment where forum_id=:forum_id");
+		query.setParameter("forum_id", forum_id);
+		List<ForumComment> f = query.list();
+		System.out.println("forum Comment of particular forum is: "+f);
+		tx.commit();
+		sess.close();
+		return f;
+	}
 	
 	
 

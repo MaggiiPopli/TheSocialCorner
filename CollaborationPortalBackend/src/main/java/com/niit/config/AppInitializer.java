@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 	@Override
 	protected Class[] getServletConfigClasses() {
 		logger.debug("Starting of the metnod getServletConfigClasses");
-		return new Class[] { AppConfig.class,ApplicationContextConfig.class};
+		return new Class[] {AppConfig.class,ApplicationContextConfig.class};
 	}
 	
 	@Override
