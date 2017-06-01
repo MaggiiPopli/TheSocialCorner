@@ -3,11 +3,11 @@
 <br><div class="post" >
           <div>
             
-            <h3 style="font:bold; font-size:20px; color: Chartreuse ;">Blog Name: {{selectedBlog.blogTitle}}</h3><br><br>
+            <h3 style="font:bold; font-size:20px; color: Chartreuse; font-family:Maiandra GD;">Blog Name: {{selectedBlog.blogTitle}}</h3><br><br>
            
-            <cite style="font:bold; color:black;">Posted By : {{selectedBlog.username}} on {{selectedBlog.date_of_creation | date}}</cite><br><br><br>
+            <cite style="font:bold; color:black;font-family:Maiandra GD; ">Posted By : {{selectedBlog.username}} on {{selectedBlog.date_of_creation | date}}</cite><br><br><br>
             <div class="post-body" style="color:black;">
-             <p>
+             <p style="font-family:Maiandra GD;">
              About Blog:  {{selectedBlog.description}}
              </p> <br>
             
@@ -18,7 +18,7 @@
              
           <br>  
           
-           <a ng-href="#/y" ng-click="commentctrl.fetchAllBlogsCommentNew(selectedBlog.blog_id)">CLICK FOR COMMENTS</a>  
+           <a ng-href="#/blogcomment" ng-click="commentctrl.fetchAllBlogsCommentNew(selectedBlog.blog_id)" style="font-family:Maiandra GD; color:red;">VIEW COMMENTS</a>  
             </div>
         </div>
       </div>

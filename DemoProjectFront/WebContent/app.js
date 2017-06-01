@@ -13,17 +13,11 @@ $routeProvider
 .when('/aboutus',{
 	templateUrl : 'l_common/aboutus.html',
 	})
-	.when('/contactus',{
-	templateUrl : 'l_common/contactus.html',
-	})
-
-.when('/x',{
-	templateUrl : 'l_forum/x.html',
-	})
 	
-	.when('/y',{
-	templateUrl : 'l_blog/y.html',
-	})
+.when('/contactus',{
+templateUrl : 'l_common/contactus.html',
+})
+	
 .when('/home',{
 templateUrl : 'l_common/body.html',
 controller : 'UserController'
@@ -104,6 +98,9 @@ controller : 'BlogController'
 templateUrl : 'l_blog/viewBlog.html',
 controller : 'BlogController'
 })
+.when('/blogcomment',{
+	templateUrl : 'l_blog/blogcomment.html',
+	})
 
 
 
@@ -125,6 +122,9 @@ controller : 'ForumController'
 templateUrl : 'l_forum/listforum.html',
 controller : 'ForumController'
 })
+.when('/forumcomment',{
+	templateUrl : 'l_forum/forumcomment.html',
+	})
 
 /*
  * 
